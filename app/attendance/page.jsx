@@ -10,8 +10,10 @@ import { Clock, Calendar, Users, TrendingUp, CheckCircle, AlertCircle, Filter, D
 export default function AttendancePage() {
   const [animateCards, setAnimateCards] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const timer = setTimeout(() => setAnimateCards(true), 100)
     const timeInterval = setInterval(() => setCurrentTime(new Date()), 1000)
     return () => {
@@ -82,7 +84,8 @@ export default function AttendancePage() {
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="space-y-6">
-        <div className="flex items-center justify-between animate-in slide-in-from-left-5 duration-700">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 animate-in slide-in-from-left-5 duration-700">
           <div>
             <h1 className="text-3xl font-bold text-foreground">Attendance Overview</h1>
             <p className="text-muted-foreground">Monitor and manage employee attendance and time tracking</p>
@@ -108,15 +111,23 @@ export default function AttendancePage() {
         >
           <CardContent className="p-6">
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">{currentTime.toLocaleTimeString()}</div>
-              <p className="text-muted-foreground">
-                {currentTime.toLocaleDateString("en-US", {
-                  weekday: "long",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </p>
+              {mounted ? (
+                <>
+                  <div className="text-4xl font-bold text-primary mb-2">
+                    {currentTime.toLocaleTimeString()}
+                  </div>
+                  <p className="text-muted-foreground">
+                    {currentTime.toLocaleDateString("en-US", {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </p>
+                </>
+              ) : (
+                <div className="h-10 w-32 bg-muted rounded animate-pulse mx-auto" />
+              )}
             </div>
           </CardContent>
         </Card>
@@ -136,7 +147,11 @@ export default function AttendancePage() {
                   <div className="space-y-2">
                     <p className="text-sm text-muted-foreground">{stat.title}</p>
                     <p className="text-2xl font-bold text-card-foreground">{stat.value}</p>
-                    <p className={`text-sm ${stat.change.startsWith("+") ? "text-green-600" : "text-red-600"}`}>
+                    <p
+                      className={`text-sm ${
+                        stat.change.startsWith("+") ? "text-green-600" : "text-red-600"
+                      }`}
+                    >
                       {stat.change} from yesterday
                     </p>
                   </div>
@@ -170,7 +185,7 @@ export default function AttendancePage() {
               {todayAttendance.map((employee, index) => (
                 <div
                   key={index}
-                  className={`flex items-center justify-between p-4 border border-border rounded-lg hover:bg-muted/50 hover:scale-102 hover:shadow-md transition-all duration-300 ${
+                  className={`flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 border border-border rounded-lg hover:bg-muted/50 hover:scale-102 hover:shadow-md transition-all duration-300 ${
                     animateCards ? "animate-in slide-in-from-left-3" : "opacity-0"
                   }`}
                   style={{ animationDelay: `${800 + index * 100}ms` }}
@@ -191,7 +206,7 @@ export default function AttendancePage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-6">
+                  <div className="flex flex-wrap md:flex-nowrap items-center gap-6">
                     <div className="text-center">
                       <p className="text-sm text-muted-foreground">Check In</p>
                       <p className="font-medium">{employee.checkIn}</p>
@@ -205,7 +220,9 @@ export default function AttendancePage() {
                       <p className="font-medium">{employee.totalHours}</p>
                     </div>
                     <Badge
-                      className={`${getStatusColor(employee.status)} text-white hover:scale-110 transition-transform duration-200`}
+                      className={`${getStatusColor(
+                        employee.status
+                      )} text-white hover:scale-110 transition-transform duration-200`}
                     >
                       {employee.status}
                     </Badge>
@@ -227,8 +244,12 @@ export default function AttendancePage() {
             <CardContent className="p-6 text-center">
               <Clock className="w-12 h-12 mx-auto mb-4 text-primary hover:rotate-12 transition-transform duration-300" />
               <h3 className="text-lg font-semibold mb-2">Time Tracking</h3>
-              <p className="text-sm text-muted-foreground mb-4">View detailed time logs and employee work hours</p>
-              <Button className="w-full hover:scale-105 transition-transform duration-200">View Time Logs</Button>
+              <p className="text-sm text-muted-foreground mb-4">
+                View detailed time logs and employee work hours
+              </p>
+              <Button className="w-full hover:scale-105 transition-transform duration-200">
+                View Time Logs
+              </Button>
             </CardContent>
           </Card>
 
@@ -241,8 +262,12 @@ export default function AttendancePage() {
             <CardContent className="p-6 text-center">
               <Calendar className="w-12 h-12 mx-auto mb-4 text-primary hover:rotate-12 transition-transform duration-300" />
               <h3 className="text-lg font-semibold mb-2">Leave Requests</h3>
-              <p className="text-sm text-muted-foreground mb-4">Manage employee leave requests and approvals</p>
-              <Button className="w-full hover:scale-105 transition-transform duration-200">Manage Leaves</Button>
+              <p className="text-sm text-muted-foreground mb-4">
+                Manage employee leave requests and approvals
+              </p>
+              <Button className="w-full hover:scale-105 transition-transform duration-200">
+                Manage Leaves
+              </Button>
             </CardContent>
           </Card>
 
@@ -255,8 +280,12 @@ export default function AttendancePage() {
             <CardContent className="p-6 text-center">
               <TrendingUp className="w-12 h-12 mx-auto mb-4 text-primary hover:rotate-12 transition-transform duration-300" />
               <h3 className="text-lg font-semibold mb-2">Attendance Reports</h3>
-              <p className="text-sm text-muted-foreground mb-4">Generate comprehensive attendance analytics</p>
-              <Button className="w-full hover:scale-105 transition-transform duration-200">View Reports</Button>
+              <p className="text-sm text-muted-foreground mb-4">
+                Generate comprehensive attendance analytics
+              </p>
+              <Button className="w-full hover:scale-105 transition-transform duration-200">
+                View Reports
+              </Button>
             </CardContent>
           </Card>
         </div>

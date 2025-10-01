@@ -34,6 +34,13 @@ export default function ProfilesPage() {
       performance: 94,
       projects: 8,
       completedTasks: 156,
+      passportNo: "P1234567",
+      passportExpiry: "2028-05-15",
+      visaType: "H1-B",
+      visaExpiry: "2026-09-10",
+      bankName: "Bank of America",
+      accountNo: "1234567890",
+      ifscCode: "BOFAUS3N",
     },
     {
       id: 2,
@@ -52,6 +59,13 @@ export default function ProfilesPage() {
       performance: 88,
       projects: 12,
       completedTasks: 203,
+      passportNo: "M9876543",
+      passportExpiry: "2027-12-01",
+      visaType: "Work Visa",
+      visaExpiry: "2025-08-30",
+      bankName: "Chase Bank",
+      accountNo: "9876543210",
+      ifscCode: "CHASUS33",
     },
   ]
 
@@ -162,115 +176,105 @@ export default function ProfilesPage() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="overview" className="w-full">
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-5">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="performance">Performance</TabsTrigger>
                 <TabsTrigger value="skills">Skills</TabsTrigger>
                 <TabsTrigger value="history">History</TabsTrigger>
+                <TabsTrigger value="information">Information</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="overview" className="space-y-6 mt-6">
+              {/* Overview Tab */}
+              <TabsContent value="overview" className="space-y-4 mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  <div><span className="font-semibold">Email:</span> {currentEmployee.email}</div>
+                  <div><span className="font-semibold">Phone:</span> {currentEmployee.phone}</div>
+                  <div><span className="font-semibold">Address:</span> {currentEmployee.address}</div>
+                  <div><span className="font-semibold">Join Date:</span> {currentEmployee.joinDate}</div>
+                  <div><span className="font-semibold">Manager:</span> {currentEmployee.manager}</div>
+                  <div><span className="font-semibold">Salary:</span> {currentEmployee.salary}</div>
+                </div>
+              </TabsContent>
+
+              {/* Performance Tab */}
+              <TabsContent value="performance" className="space-y-6 mt-6">
+                <div>
+                  <h4 className="font-semibold mb-2">Overall Performance</h4>
+                  <Progress value={currentEmployee.performance} className="h-2" />
+                  <p className="text-sm mt-1">{currentEmployee.performance}% Efficiency</p>
+                </div>
+                <div className="grid grid-cols-3 gap-4 text-sm">
+                  <div><span className="font-semibold">Projects:</span> {currentEmployee.projects}</div>
+                  <div><span className="font-semibold">Tasks Completed:</span> {currentEmployee.completedTasks}</div>
+                  <div><span className="font-semibold">Recent Score:</span> {performanceData[performanceData.length-1].score}</div>
+                </div>
+              </TabsContent>
+
+              {/* Skills Tab */}
+              <TabsContent value="skills" className="space-y-4 mt-6">
+                <div className="flex flex-wrap gap-2">
+                  {currentEmployee.skills.map((skill, index) => (
+                    <Badge key={index} variant="secondary">{skill}</Badge>
+                  ))}
+                </div>
+              </TabsContent>
+
+              {/* History Tab */}
+              <TabsContent value="history" className="space-y-4 mt-6">
+                <ul className="list-disc list-inside text-sm space-y-1">
+                  <li>Joined on {currentEmployee.joinDate}</li>
+                  <li>Assigned under manager {currentEmployee.manager}</li>
+                  <li>Worked on {currentEmployee.projects} major projects</li>
+                  <li>Completed {currentEmployee.completedTasks} tasks successfully</li>
+                </ul>
+              </TabsContent>
+
+              {/* Information Tab (already existing) */}
+              <TabsContent value="information" className="space-y-6 mt-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
-                    <h4 className="font-semibold">Contact Information</h4>
+                    <h4 className="font-semibold">Passport Details</h4>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Email:</span>
-                        <span>{currentEmployee.email}</span>
+                        <span className="text-muted-foreground">Passport No:</span>
+                        <span>{currentEmployee.passportNo || "N/A"}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Phone:</span>
-                        <span>{currentEmployee.phone}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Address:</span>
-                        <span className="text-right">{currentEmployee.address}</span>
+                        <span className="text-muted-foreground">Expiry Date:</span>
+                        <span>{currentEmployee.passportExpiry || "N/A"}</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="space-y-4">
-                    <h4 className="font-semibold">Employment Details</h4>
+                    <h4 className="font-semibold">Visa Details</h4>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Join Date:</span>
-                        <span>{new Date(currentEmployee.joinDate).toLocaleDateString()}</span>
+                        <span className="text-muted-foreground">Visa Type:</span>
+                        <span>{currentEmployee.visaType || "N/A"}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Manager:</span>
-                        <span>{currentEmployee.manager}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Salary:</span>
-                        <span>{currentEmployee.salary}</span>
+                        <span className="text-muted-foreground">Expiry Date:</span>
+                        <span>{currentEmployee.visaExpiry || "N/A"}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <Card>
-                    <CardContent className="p-4 text-center">
-                      <div className="text-2xl font-bold text-primary">{currentEmployee.performance}%</div>
-                      <p className="text-sm text-muted-foreground">Performance Score</p>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-4 text-center">
-                      <div className="text-2xl font-bold text-primary">{currentEmployee.projects}</div>
-                      <p className="text-sm text-muted-foreground">Active Projects</p>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-4 text-center">
-                      <div className="text-2xl font-bold text-primary">{currentEmployee.completedTasks}</div>
-                      <p className="text-sm text-muted-foreground">Completed Tasks</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="performance" className="space-y-6 mt-6">
                 <div className="space-y-4">
-                  <h4 className="font-semibold">Performance Trends</h4>
-                  <div className="space-y-3">
-                    {performanceData.map((data, index) => (
-                      <div key={data.month} className="flex items-center space-x-4">
-                        <span className="w-12 text-sm text-muted-foreground">{data.month}</span>
-                        <Progress value={data.score} className="flex-1" />
-                        <span className="w-12 text-sm font-medium">{data.score}%</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="skills" className="space-y-6 mt-6">
-                <div className="space-y-4">
-                  <h4 className="font-semibold">Technical Skills</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {currentEmployee.skills.map((skill) => (
-                      <Badge key={skill} variant="secondary" className="text-sm">
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="history" className="space-y-6 mt-6">
-                <div className="space-y-4">
-                  <h4 className="font-semibold">Employment History</h4>
-                  <div className="space-y-3">
-                    <div className="border-l-2 border-primary pl-4">
-                      <div className="font-medium">Senior Developer</div>
-                      <div className="text-sm text-muted-foreground">March 2022 - Present</div>
-                      <div className="text-sm">Promoted to senior role with increased responsibilities</div>
+                  <h4 className="font-semibold">Bank Details</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Bank Name:</span>
+                      <span>{currentEmployee.bankName || "N/A"}</span>
                     </div>
-                    <div className="border-l-2 border-muted pl-4">
-                      <div className="font-medium">Junior Developer</div>
-                      <div className="text-sm text-muted-foreground">March 2022 - March 2023</div>
-                      <div className="text-sm">Started as junior developer in the engineering team</div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Account No:</span>
+                      <span>{currentEmployee.accountNo || "N/A"}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">IFSC Code:</span>
+                      <span>{currentEmployee.ifscCode || "N/A"}</span>
                     </div>
                   </div>
                 </div>

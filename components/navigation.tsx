@@ -28,6 +28,7 @@ const navigationItems = [
       { name: "Add Employee", href: "/employees/add" },
       { name: "Departments", href: "/employees/departments" },
       { name: "Profiles", href: "/employees/profiles" },
+      { name: "Payroll", href: "/employees/payroll" },
     ],
   },
   {
@@ -36,6 +37,7 @@ const navigationItems = [
       { name: "Time Tracking", href: "/attendance/time-tracking" },
       { name: "Leave Requests", href: "/attendance/leave-requests" },
       { name: "Reports", href: "/attendance/reports" },
+      { name: "Shift & Schedule", href: "/attendance/shift_shedule" },
     ],
   },
   {
@@ -54,10 +56,20 @@ const navigationItems = [
       { name: "Security", href: "/settings/security" },
     ],
   },
+  {
+    name: "Courses",
+    items:[
+      {name: "Engineering", href:"/courses/engineering"},
+      {name: "Marketing", href:"/courses/marketing"},
+      {name: "Sales", href:"/courses/sales"},
+      {name: "HR", href:"/courses/hr"},
+    ]
+  }
 ]
 
 export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [openMenu, setOpenMenu] = useState<string | null>(null)
 
   return (
     <nav className="bg-card border-b border-border px-6 py-4">
@@ -70,11 +82,19 @@ export function Navigation() {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6">
           {navigationItems.map((section) => (
-            <DropdownMenu key={section.name}>
+            <DropdownMenu
+              key={section.name}
+              open={openMenu === section.name}
+              onOpenChange={(isOpen) =>
+                setOpenMenu(isOpen ? section.name : null)
+              }
+            >
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
                   className="text-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200"
+                  onMouseEnter={() => setOpenMenu(section.name)}
+                  onMouseLeave={() => setOpenMenu(null)}
                 >
                   {section.name}
                   <svg
@@ -92,7 +112,11 @@ export function Navigation() {
                   </svg>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-48">
+              <DropdownMenuContent
+                className="w-48"
+                onMouseEnter={() => setOpenMenu(section.name)}
+                onMouseLeave={() => setOpenMenu(null)}
+              >
                 {section.items.map((item) => (
                   <DropdownMenuItem key={item.name} asChild>
                     <Link
