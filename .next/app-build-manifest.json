@@ -21,15 +21,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/page.js"
     ],
-    "/performance/loading": [
+    "/attendance/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/performance/loading.js"
+      "static/chunks/app/attendance/loading.js"
     ],
-    "/performance/surveys/page": [
+    "/attendance/calendar/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/performance/surveys/page.js"
+      "static/chunks/app/attendance/calendar/page.js"
     ]
   }
 }

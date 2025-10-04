@@ -38,6 +38,7 @@ const navigationItems = [
       { name: "Leave Requests", href: "/attendance/leave-requests" },
       { name: "Reports", href: "/attendance/reports" },
       { name: "Shift & Schedule", href: "/attendance/shift_shedule" },
+      { name: "Calendar", href: "/attendance/calendar" }
     ],
   },
   {
