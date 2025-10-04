@@ -1616,6 +1616,9 @@ font-weight: 100 900;
       background-color: color-mix(in oklab, var(--color-yellow-500) 20%, transparent);
     }
   }
+  .bg-yellow-600 {
+    background-color: var(--color-yellow-600);
+  }
   .bg-gradient-to-b {
     --tw-gradient-position: to bottom in oklab;
     background-image: linear-gradient(var(--tw-gradient-stops));
@@ -3087,6 +3090,13 @@ font-weight: 100 900;
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-yellow-100);
+      }
+    }
+  }
+  .hover\:bg-yellow-700 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-yellow-700);
       }
     }
   }
