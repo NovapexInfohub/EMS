@@ -11,15 +11,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/loading.js"
     ],
-    "/performance/loading": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/performance/loading.js"
+      "static/chunks/app/page.js"
     ],
-    "/performance/rewards/page": [
+    "/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/performance/rewards/page.js"
+      "static/chunks/app/dashboard/page.js"
     ]
   }
 }
