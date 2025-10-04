@@ -46,6 +46,8 @@ const navigationItems = [
       { name: "Reviews", href: "/performance/reviews" },
       { name: "Goals", href: "/performance/goals" },
       { name: "Feedback", href: "/performance/feedback" },
+      { name: "Surveys", href: "/performance/surveys" }
+
     ],
   },
   {
