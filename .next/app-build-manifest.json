@@ -11,38 +11,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/loading.js"
     ],
-<<<<<<< HEAD
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
-    ],
-    "/dashboard/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/page.js"
-    ],
-    "/attendance/loading": [
-=======
     "/performance/loading": [
->>>>>>> 1b7b479b1b9f63c016a6a282c87c1c1b4df8afa4
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/attendance/loading.js"
-    ],
-    "/attendance/calendar/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-<<<<<<< HEAD
-      "static/chunks/app/attendance/calendar/page.js"
-=======
-      "static/chunks/app/performance/surveys/page.js"
+      "static/chunks/app/performance/loading.js"
     ],
     "/performance/rewards/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/performance/rewards/page.js"
->>>>>>> 1b7b479b1b9f63c016a6a282c87c1c1b4df8afa4
     ]
   }
 }

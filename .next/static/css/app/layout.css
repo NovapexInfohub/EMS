@@ -59,10 +59,7 @@ font-weight: 100 900;
     --color-blue-50: oklch(97% 0.014 254.604);
     --color-blue-100: oklch(93.2% 0.032 255.585);
     --color-blue-200: oklch(88.2% 0.059 254.128);
-<<<<<<< HEAD
-=======
     --color-blue-300: oklch(80.9% 0.105 251.813);
->>>>>>> 1b7b479b1b9f63c016a6a282c87c1c1b4df8afa4
     --color-blue-400: oklch(70.7% 0.165 254.624);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-blue-600: oklch(54.6% 0.245 262.881);
@@ -504,6 +501,9 @@ font-weight: 100 900;
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
   }
+  .mt-5 {
+    margin-top: calc(var(--spacing) * 5);
+  }
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
   }
@@ -862,9 +862,6 @@ font-weight: 100 900;
   }
   .w-80 {
     width: calc(var(--spacing) * 80);
-  }
-  .w-96 {
-    width: calc(var(--spacing) * 96);
   }
   .w-\[100px\] {
     width: 100px;
@@ -1370,16 +1367,14 @@ font-weight: 100 900;
   .border-\(--color-border\) {
     border-color: var(--color-border);
   }
-<<<<<<< HEAD
-  .border-blue-200 {
-    border-color: var(--color-blue-200);
-=======
   .border-blue-100 {
     border-color: var(--color-blue-100);
->>>>>>> 1b7b479b1b9f63c016a6a282c87c1c1b4df8afa4
   }
   .border-blue-500 {
     border-color: var(--color-blue-500);
+  }
+  .border-blue-600 {
+    border-color: var(--color-blue-600);
   }
   .border-border {
     border-color: var(--border);
@@ -1432,6 +1427,9 @@ font-weight: 100 900;
   .border-red-500 {
     border-color: var(--color-red-500);
   }
+  .border-red-600 {
+    border-color: var(--color-red-600);
+  }
   .border-sidebar-border {
     border-color: var(--sidebar-border);
   }
@@ -1464,9 +1462,6 @@ font-weight: 100 900;
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--background) 80%, transparent);
     }
-  }
-  .bg-black {
-    background-color: var(--color-black);
   }
   .bg-black\/50 {
     background-color: color-mix(in srgb, #000 50%, transparent);
@@ -1531,11 +1526,8 @@ font-weight: 100 900;
       background-color: color-mix(in oklab, var(--color-green-500) 20%, transparent);
     }
   }
-  .bg-indigo-600 {
-    background-color: var(--color-indigo-600);
-  }
-  .bg-indigo-100 {
-    background-color: var(--color-indigo-100);
+  .bg-green-600 {
+    background-color: var(--color-green-600);
   }
   .bg-indigo-600 {
     background-color: var(--color-indigo-600);
@@ -1632,6 +1624,9 @@ font-weight: 100 900;
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-yellow-500) 20%, transparent);
     }
+  }
+  .bg-yellow-600 {
+    background-color: var(--color-yellow-600);
   }
   .bg-gradient-to-b {
     --tw-gradient-position: to bottom in oklab;
@@ -1734,6 +1729,9 @@ font-weight: 100 900;
   }
   .p-8 {
     padding: calc(var(--spacing) * 8);
+  }
+  .p-10 {
+    padding: calc(var(--spacing) * 10);
   }
   .p-12 {
     padding: calc(var(--spacing) * 12);
@@ -2021,9 +2019,6 @@ font-weight: 100 900;
   }
   .text-green-800 {
     color: var(--color-green-800);
-  }
-  .text-indigo-700 {
-    color: var(--color-indigo-700);
   }
   .text-indigo-700 {
     color: var(--color-indigo-700);
@@ -2980,10 +2975,10 @@ font-weight: 100 900;
       }
     }
   }
-  .hover\:bg-indigo-700 {
+  .hover\:bg-green-700 {
     &:hover {
       @media (hover: hover) {
-        background-color: var(--color-indigo-700);
+        background-color: var(--color-green-700);
       }
     }
   }
@@ -3052,6 +3047,20 @@ font-weight: 100 900;
       }
     }
   }
+  .hover\:bg-red-600 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-red-600);
+      }
+    }
+  }
+  .hover\:bg-red-700 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-red-700);
+      }
+    }
+  }
   .hover\:bg-secondary {
     &:hover {
       @media (hover: hover) {
@@ -3100,6 +3109,13 @@ font-weight: 100 900;
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-yellow-100);
+      }
+    }
+  }
+  .hover\:bg-yellow-700 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-yellow-700);
       }
     }
   }
@@ -3177,6 +3193,13 @@ font-weight: 100 900;
     &:hover {
       @media (hover: hover) {
         color: var(--sidebar-accent-foreground);
+      }
+    }
+  }
+  .hover\:text-white {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-white);
       }
     }
   }

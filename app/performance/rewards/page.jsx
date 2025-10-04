@@ -38,22 +38,48 @@ export default function RewardPage() {
   const [isAdding, setIsAdding] = useState(false);
   const [search, setSearch] = useState("");
   const [filterDept, setFilterDept] = useState("");
+  const [editId, setEditId] = useState(null);
 
-  const handleAddReward = () => {
+  const handleAddOrEditReward = () => {
     if (!form.employeeName || !form.rewardTitle || !form.rewardPoints || !form.department) return;
-    setRewards([
-      ...rewards,
-      {
-        id: rewards.length + 1,
-        ...form,
-        date: new Date().toISOString().split("T")[0],
-      },
-    ]);
+
+    if (editId) {
+      // 🔹 Update existing reward
+      setRewards(
+        rewards.map((reward) =>
+          reward.id === editId ? { ...reward, ...form } : reward
+        )
+      );
+      setEditId(null);
+    } else {
+      // 🔹 Add new reward
+      setRewards([
+        ...rewards,
+        {
+          id: rewards.length + 1,
+          ...form,
+          date: new Date().toISOString().split("T")[0],
+        },
+      ]);
+    }
+
     setForm({ employeeName: "", rewardTitle: "", rewardPoints: "", department: "", description: "" });
     setIsAdding(false);
   };
 
   const handleDelete = (id) => setRewards(rewards.filter((reward) => reward.id !== id));
+
+  const handleEdit = (reward) => {
+    setForm({
+      employeeName: reward.employeeName,
+      rewardTitle: reward.rewardTitle,
+      rewardPoints: reward.rewardPoints,
+      department: reward.department,
+      description: reward.description,
+    });
+    setEditId(reward.id);
+    setIsAdding(true); // open form
+  };
 
   const filteredRewards = rewards.filter(
     (reward) =>
@@ -70,7 +96,7 @@ export default function RewardPage() {
         className="text-4xl font-bold text-center mb-10 text-blue-700"
       >
         <div className="flex justify-center items-center gap-2">
-          <Gift className="text-blue-600 w-8 h-8" /> Employee Rewards 
+          <Gift className="text-blue-600 w-8 h-8" /> Employee Rewards
         </div>
       </motion.h1>
 
@@ -104,7 +130,11 @@ export default function RewardPage() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => setIsAdding(!isAdding)}
+            onClick={() => {
+              if (isAdding && !editId) setForm({ employeeName: "", rewardTitle: "", rewardPoints: "", department: "", description: "" });
+              setIsAdding(!isAdding);
+              setEditId(null);
+            }}
             className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 hover:shadow-blue-400 hover:shadow-lg transition"
           >
             <PlusCircle size={20} /> {isAdding ? "Cancel" : "Add Reward"}
@@ -112,7 +142,7 @@ export default function RewardPage() {
         </div>
       </div>
 
-      {/* Add Reward Form */}
+      {/* Add / Edit Reward Form */}
       <AnimatePresence>
         {isAdding && (
           <motion.div
@@ -121,7 +151,9 @@ export default function RewardPage() {
             exit={{ opacity: 0, y: -20 }}
             className="bg-white shadow-xl rounded-xl p-6 mb-10 border border-blue-100 hover:shadow-blue-200 hover:shadow-lg transition"
           >
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">Add New Reward</h2>
+            <h2 className="text-xl font-semibold text-gray-700 mb-4">
+              {editId ? "Edit Reward" : "Add New Reward"}
+            </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
@@ -166,10 +198,12 @@ export default function RewardPage() {
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={handleAddReward}
-                className="bg-green-600 text-white px-4 py-2 rounded-lg col-span-2 hover:bg-green-700 hover:shadow-blue-300 hover:shadow-lg transition"
+                onClick={handleAddOrEditReward}
+                className={`${
+                  editId ? "bg-yellow-600 hover:bg-yellow-700" : "bg-green-600 hover:bg-green-700"
+                } text-white px-4 py-2 rounded-lg col-span-2 hover:shadow-blue-300 hover:shadow-lg transition`}
               >
-                Save Reward
+                {editId ? "Update Reward" : "Save Reward"}
               </motion.button>
             </div>
           </motion.div>
@@ -207,7 +241,11 @@ export default function RewardPage() {
                 <span className="text-gray-400 text-xs">{reward.date}</span>
               </div>
               <div className="flex justify-end gap-3 mt-3">
-                <motion.button whileHover={{ scale: 1.1 }} className="text-blue-600 hover:text-blue-800">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  onClick={() => handleEdit(reward)}
+                  className="text-blue-600 hover:text-blue-800"
+                >
                   <Edit size={18} />
                 </motion.button>
                 <motion.button
