@@ -1520,6 +1520,9 @@ font-weight: 100 900;
   .bg-green-600 {
     background-color: var(--color-green-600);
   }
+  .bg-indigo-100 {
+    background-color: var(--color-indigo-100);
+  }
   .bg-indigo-600 {
     background-color: var(--color-indigo-600);
   }
@@ -1720,9 +1723,6 @@ font-weight: 100 900;
   }
   .p-8 {
     padding: calc(var(--spacing) * 8);
-  }
-  .p-10 {
-    padding: calc(var(--spacing) * 10);
   }
   .p-12 {
     padding: calc(var(--spacing) * 12);
@@ -2010,6 +2010,9 @@ font-weight: 100 900;
   }
   .text-green-800 {
     color: var(--color-green-800);
+  }
+  .text-indigo-600 {
+    color: var(--color-indigo-600);
   }
   .text-indigo-700 {
     color: var(--color-indigo-700);
