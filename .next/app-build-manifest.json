@@ -21,6 +21,7 @@
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/page.js"
     ],
+<<<<<<< HEAD
     "/dashboard/analytics/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -165,6 +166,12 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/settings/security/page.js"
+=======
+    "/employeedashboard/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/page.js"
+>>>>>>> 0970e6e35d4f289cf10d9996503db52633a59fe4
     ]
   }
 }
