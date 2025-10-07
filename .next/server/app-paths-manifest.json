@@ -1,4 +1,8 @@
 {
-  "/page": "app/page.js",
-  "/dashboard/page": "app/dashboard/page.js"
+  "/performance/feedback/page": "app/performance/feedback/page.js",
+  "/settings/company/page": "app/settings/company/page.js",
+  "/performance/goals/page": "app/performance/goals/page.js",
+  "/performance/reviews/page": "app/performance/reviews/page.js",
+  "/settings/users/page": "app/settings/users/page.js",
+  "/settings/security/page": "app/settings/security/page.js"
 }
