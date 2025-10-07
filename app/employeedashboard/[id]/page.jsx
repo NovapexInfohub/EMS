@@ -13,7 +13,7 @@ export default function EmployeeDashboard() {
 
   // Mock employee data
   const employees = {
-    1: {
+    101: {
       name: "Alice Johnson",
       department: "Engineering",
       position: "Frontend Developer",

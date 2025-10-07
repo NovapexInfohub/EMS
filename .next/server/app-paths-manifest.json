@@ -1,14 +1,5 @@
 {
-<<<<<<< HEAD
-  "/performance/feedback/page": "app/performance/feedback/page.js",
-  "/settings/company/page": "app/settings/company/page.js",
-  "/performance/goals/page": "app/performance/goals/page.js",
-  "/performance/reviews/page": "app/performance/reviews/page.js",
-  "/settings/users/page": "app/settings/users/page.js",
-  "/settings/security/page": "app/settings/security/page.js"
-=======
-  "/page": "app/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/employeedashboard/[id]/attendance/page": "app/employeedashboard/[id]/attendance/page.js",
   "/employeedashboard/page": "app/employeedashboard/page.js"
->>>>>>> 0970e6e35d4f289cf10d9996503db52633a59fe4
 }
