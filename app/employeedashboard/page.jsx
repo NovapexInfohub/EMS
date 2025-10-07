@@ -98,21 +98,18 @@ export default function EmployeeDashboardMain() {
         </Card>
 
 
+      
         {/* Attendance Card */}
         <Card
           onClick={() => router.push(`/employeedashboard/${employee.id}/attendance`)}
           className="shadow-md border border-gray-200 cursor-pointer hover:shadow-lg hover:shadow-indigo-200 transition-all duration-300"
         >
-        {/* Attendance */}
-        <Card className="shadow-md border border-gray-200">
           <CardHeader className="flex items-center gap-3">
             <CalendarDays className="text-indigo-600 w-6 h-6" />
             <CardTitle>Attendance</CardTitle>
           </CardHeader>
-          <CardContent>
-            <p className="text-gray-700 mb-2">
-              Attendance Rate: {employee.attendance}%
-            </p>
+          <CardContent className="space-y-3">
+            <p className="text-gray-700">Attendance Rate: {employee.attendance}%</p>
             <Progress value={employee.attendance} className="h-3" />
             <Button
               variant="outline"
@@ -122,6 +119,7 @@ export default function EmployeeDashboardMain() {
             </Button>
           </CardContent>
         </Card>
+
 
 
         {/* Performance */}

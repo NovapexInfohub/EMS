@@ -1,9 +1,4 @@
 {
-<<<<<<< HEAD
-  "/_not-found/page": "app/_not-found/page.js",
   "/employeedashboard/[id]/attendance/page": "app/employeedashboard/[id]/attendance/page.js",
-=======
-  "/dashboard/page": "app/dashboard/page.js",
->>>>>>> c3b09f7b2328f50b948aa03ff1969d1c56171754
   "/employeedashboard/page": "app/employeedashboard/page.js"
 }
