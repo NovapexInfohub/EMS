@@ -31,15 +31,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/employeedashboard/[id]/attendance/page.js"
     ],
-    "/employeedashboard/[id]/performance/page": [
+    "/employeedashboard/[id]/attendance/leave-request/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/performance/page.js"
+      "static/chunks/app/employeedashboard/[id]/attendance/leave-request/page.js"
     ],
-    "/employeedashboard/[id]/page": [
+    "/employeedashboard/[id]/attendance/wfh-request/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/page.js"
+      "static/chunks/app/employeedashboard/[id]/attendance/wfh-request/page.js"
     ]
   }
 }
