@@ -18,22 +18,25 @@ export default function LeaveRequestPage() {
     startDate: "",
     endDate: "",
     reason: "",
+    contact: "",
+    document: null,
   });
 
   const leaveBalances = [
     { type: "Sick Leave", balance: 5 },
     { type: "Casual Leave", balance: 3 },
     { type: "Earned Leave", balance: 10 },
+    { type: "Maternity/Paternity", balance: 30 },
   ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Leave request submitted by Employee ID: ${id}`);
+    alert(`Leave request submitted successfully by Employee ID: ${id}`);
   };
 
   return (
     <motion.main
-      className="min-h-screen bg-gray-50 p-8 space-y-8"
+      className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 p-8 space-y-10"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -30 }}
@@ -46,47 +49,25 @@ export default function LeaveRequestPage() {
           Leave Request
         </h1>
         <Button
-          onClick={() => router.push(`/employee/${id}/attendance`)}
+          onClick={() => router.push(`/employeedashboard/${id}/attendance`)}
           className="bg-blue-600 hover:bg-blue-700"
         >
           ← Back to Attendance
         </Button>
       </div>
 
-      {/* Leave Balance Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {leaveBalances.map((leave) => (
-          <motion.div
-            key={leave.type}
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Card className="shadow-md border border-gray-200">
-              <CardHeader>
-                <CardTitle>{leave.type}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-3xl font-bold text-blue-600">
-                  {leave.balance}
-                </p>
-                <p className="text-gray-600">days remaining</p>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
-
       {/* Leave Request Form */}
       <motion.form
         onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded-xl p-6 space-y-4 max-w-2xl mx-auto"
+        className="bg-white shadow-xl rounded-2xl p-8 space-y-6 max-w-3xl mx-auto border border-gray-200"
         whileHover={{ scale: 1.01 }}
       >
-        <h2 className="text-xl font-semibold text-blue-700 mb-4">
+        <h2 className="text-2xl font-semibold text-blue-700 mb-2 text-center">
           Apply for Leave
         </h2>
 
-        <div className="grid gap-4">
+        <div className="grid gap-5">
+          {/* Leave Type */}
           <div>
             <label className="font-medium text-gray-700">Leave Type</label>
             <Input
@@ -99,7 +80,9 @@ export default function LeaveRequestPage() {
               required
             />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+
+          {/* Dates */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
               <label className="font-medium text-gray-700">Start Date</label>
               <Input
@@ -123,6 +106,8 @@ export default function LeaveRequestPage() {
               />
             </div>
           </div>
+
+          {/* Reason */}
           <div>
             <label className="font-medium text-gray-700">Reason</label>
             <Textarea
@@ -133,11 +118,72 @@ export default function LeaveRequestPage() {
             />
           </div>
 
-          <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
-            Submit Request
-          </Button>
+          {/* Contact Info */}
+          <div>
+            <label className="font-medium text-gray-700">
+              Contact During Leave
+            </label>
+            <Input
+              type="text"
+              value={form.contact}
+              onChange={(e) =>
+                setForm({ ...form, contact: e.target.value })
+              }
+              placeholder="Enter phone number or email"
+            />
+          </div>
+
+          {/* File Upload */}
+          <div>
+            <label className="font-medium text-gray-700">
+              Attach Supporting Document (Optional)
+            </label>
+            <Input
+              type="file"
+              accept=".pdf,.jpg,.png"
+              onChange={(e) =>
+                setForm({ ...form, document: e.target.files[0] })
+              }
+            />
+          </div>
+
+          {/* Submit Button */}
+          <div className="pt-2 text-center">
+            <Button
+              type="submit"
+              className="bg-blue-600 hover:bg-blue-700 px-8 py-2"
+            >
+              Submit Leave Request
+            </Button>
+          </div>
         </div>
       </motion.form>
+
+      {/* Leave Balance Section (Equal Cards) */}
+      <section className="pt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {leaveBalances.map((leave) => (
+          <motion.div
+            key={leave.type}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+            className="flex"
+          >
+            <Card className="flex flex-col justify-between w-full h-40 shadow-md border border-gray-200 rounded-xl">
+              <CardHeader className="text-center">
+                <CardTitle className="text-base text-gray-800">
+                  {leave.type}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-3xl font-bold text-blue-600">
+                  {leave.balance}
+                </p>
+                <p className="text-gray-600 text-sm">days remaining</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </section>
     </motion.main>
   );
 }

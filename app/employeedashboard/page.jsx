@@ -24,7 +24,7 @@ export default function EmployeeDashboardMain() {
 
   const [employee, setEmployee] = useState({
     id: 101,
-    name: "Alice Johnson",
+    name: "Alice",
     department: "Engineering",
     position: "Frontend Developer",
     status: "Active",

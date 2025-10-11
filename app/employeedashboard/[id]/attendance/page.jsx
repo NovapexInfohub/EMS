@@ -1,27 +1,27 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, ChevronDown } from "lucide-react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 
 export default function EmployeeAttendancePage() {
-  const { id } = useParams();
+  const params = useParams();
+  const id = params?.id;
   const router = useRouter();
 
-  // 🧠 Mock Attendance Data
-  const [attendance, setAttendance] = useState({
-    employeeId: id,
-    name: "Alice Johnson",
-    department: "Engineering",
-    totalDays: 30,
-    presentDays: 26,
-    absentDays: 4,
+  const [attendance] = useState({
     records: [
       { date: "2025-10-01", status: "Present" },
       { date: "2025-10-02", status: "Absent" },
@@ -34,11 +34,6 @@ export default function EmployeeAttendancePage() {
     ],
   });
 
-  const percentage = Math.round(
-    (attendance.presentDays / attendance.totalDays) * 100
-  );
-
-  // 🟢 Convert attendance records to calendar events
   const events = attendance.records.map((rec) => ({
     title: rec.status,
     start: rec.date,
@@ -46,7 +41,6 @@ export default function EmployeeAttendancePage() {
     textColor: "white",
   }));
 
-  // 🎬 Smooth transition animation
   const pageTransition = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -64,59 +58,69 @@ export default function EmployeeAttendancePage() {
         <div>
           <h1 className="text-3xl font-bold text-indigo-700 flex items-center gap-3">
             <CalendarDays className="text-indigo-600 w-7 h-7" />
-            Attendance Overview
+            Attendance Calendar
           </h1>
           <p className="text-gray-600">
-            Track attendance, view leave and work-from-home requests.
+            View attendance, leave requests, and work-from-home requests.
           </p>
         </div>
 
-        <motion.div whileHover={{ scale: 1.05 }}>
-          <Button
-            onClick={() => router.push(`/employee/${id}/dashboard`)}
-            className="bg-indigo-600 hover:bg-indigo-700"
-          >
-            ← Back to Dashboard
-          </Button>
-        </motion.div>
-      </div>
+        <div className="flex items-center gap-3">
+          {/* Request Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="bg-indigo-600 hover:bg-indigo-700 text-white flex items-center gap-2">
+                Request <ChevronDown className="w-4 h-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-60">
+              <DropdownMenuItem
+                onClick={() =>
+                  router.push(`/employeedashboard/${id}/attendance/leave-request`)
+                }
+              >
+                Leave Request
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() =>
+                  router.push(`/employeedashboard/${id}/attendance/wfh-request`)
+                }
+              >
+                Work From Home Request
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() =>
+                  router.push(`/employeedashboard/${id}/attendance/halfday-request`)
+                }
+              >
+                Half Day Request
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() =>
+                  router.push(`/employeedashboard/${id}/attendance/document-request`)
+                }
+              >
+                Document Request
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-      {/* ===== Summary Card ===== */}
-      <Card className="shadow-md border border-gray-200">
-        <CardHeader>
-          <CardTitle>Employee Attendance Summary</CardTitle>
-        </CardHeader>
-        <CardContent className="text-gray-700 space-y-2">
-          <p>
-            <strong>Name:</strong> {attendance.name}
-          </p>
-          <p>
-            <strong>Department:</strong> {attendance.department}
-          </p>
-          <p>
-            <strong>Total Working Days:</strong> {attendance.totalDays}
-          </p>
-          <p>
-            <strong>Attendance Rate:</strong>{" "}
-            <span
-              className={`font-semibold ${
-                percentage >= 90
-                  ? "text-green-600"
-                  : percentage >= 75
-                  ? "text-yellow-600"
-                  : "text-red-600"
-              }`}
+          {/* Back Button */}
+          <motion.div whileHover={{ scale: 1.05 }}>
+            <Button
+              onClick={() => router.push(`/employeedashboard`)}
+              className="bg-gray-200 text-gray-800 hover:bg-gray-300"
             >
-              {percentage}%
-            </span>
-          </p>
-        </CardContent>
-      </Card>
+              ← Back
+            </Button>
+          </motion.div>
+        </div>
+      </div>
 
       {/* ===== Calendar ===== */}
       <Card className="shadow-md border border-gray-200 p-4">
         <CardHeader>
-          <CardTitle>Monthly Attendance Calendar</CardTitle>
+          <CardTitle>Monthly Attendance</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="h-[700px]">
@@ -130,45 +134,15 @@ export default function EmployeeAttendancePage() {
                   (r) => r.date === info.date.toISOString().split("T")[0]
                 );
                 if (record) {
-                  if (record.status === "Present") {
-                    info.el.style.color = "#16a34a"; // green
-                    info.el.style.fontWeight = "bold";
-                  } else if (record.status === "Absent") {
-                    info.el.style.color = "#dc2626"; // red
-                    info.el.style.fontWeight = "bold";
-                  }
+                  info.el.style.color =
+                    record.status === "Present" ? "#16a34a" : "#dc2626";
+                  info.el.style.fontWeight = "bold";
                 }
               }}
             />
           </div>
         </CardContent>
       </Card>
-
-      {/* ===== Action Buttons Below Calendar ===== */}
-      <motion.div
-        className="flex flex-col sm:flex-row justify-center gap-4 mt-8"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-      >
-        <motion.div whileHover={{ scale: 1.05 }}>
-          <Button
-            onClick={() => router.push(`/employeedashboard/${id}/attendance/leave-request`)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2"
-          >
-            🏖️ Request Leave
-          </Button>
-        </motion.div>
-
-        <motion.div whileHover={{ scale: 1.05 }}>
-          <Button
-            onClick={() => router.push(`/employeedashboard/${id}/attendance/wfh-request`)}
-            className="bg-green-600 hover:bg-green-700 text-white px-6 py-2"
-          >
-            🏠 Work From Home Request
-          </Button>
-        </motion.div>
-      </motion.div>
     </motion.main>
   );
 }
