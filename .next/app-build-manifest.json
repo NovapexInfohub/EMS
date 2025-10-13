@@ -31,15 +31,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/employeedashboard/[id]/attendance/page.js"
     ],
-    "/employeedashboard/[id]/attendance/halfday-request/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/attendance/halfday-request/page.js"
-    ],
     "/employeedashboard/[id]/attendance/leave-request/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/employeedashboard/[id]/attendance/leave-request/page.js"
+    ],
+    "/employeedashboard/[id]/attendance/halfday-request/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/attendance/halfday-request/page.js"
     ],
     "/employeedashboard/[id]/attendance/wfh-request/page": [
       "static/chunks/webpack.js",
@@ -50,16 +50,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/employeedashboard/[id]/attendance/document-request/page.js"
-    ],
-    "/employeedashboard/[id]/performance/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/performance/page.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
     ]
   }
 }
