@@ -1,108 +1,145 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { CalendarDays, ChevronDown } from "lucide-react";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { CalendarDays } from "lucide-react";
 
 export default function EmployeeAttendancePage() {
-  const { id } = useParams();
+  const params = useParams();
+  const id = params?.id;
   const router = useRouter();
 
-  // 🧠 Mock Attendance Data
-  const [attendance, setAttendance] = useState({
-    employeeId: id,
-    name: "Alice Johnson",
-    department: "Engineering",
-    totalDays: 30,
-    presentDays: 27,
-    absentDays: 3,
+  const [attendance] = useState({
     records: [
       { date: "2025-10-01", status: "Present" },
-      { date: "2025-10-02", status: "Present" },
-      { date: "2025-10-03", status: "Absent" },
+      { date: "2025-10-02", status: "Absent" },
+      { date: "2025-10-03", status: "Present" },
       { date: "2025-10-04", status: "Present" },
-      { date: "2025-10-05", status: "Present" },
-      // ...more
+      { date: "2025-10-05", status: "Absent" },
+      { date: "2025-10-06", status: "Present" },
+      { date: "2025-10-07", status: "Present" },
+      { date: "2025-10-08", status: "Absent" },
     ],
   });
 
-  const percentage = Math.round((attendance.presentDays / attendance.totalDays) * 100);
+  const events = attendance.records.map((rec) => ({
+    title: rec.status,
+    start: rec.date,
+    color: rec.status === "Present" ? "#22c55e" : "#ef4444",
+    textColor: "white",
+  }));
+
+  const pageTransition = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 },
+    transition: { duration: 0.6, ease: "easeInOut" },
+  };
 
   return (
     <motion.main
       className="min-h-screen bg-gray-50 p-8 space-y-8"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      {...pageTransition}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-indigo-700 flex items-center gap-3">
-          <CalendarDays className="text-indigo-600 w-7 h-7" />
-          Attendance Report
-        </h1>
-        <Button
-          onClick={() => router.back()}
-          className="bg-indigo-600 hover:bg-indigo-700"
-        >
-          ← Back to Dashboard
-        </Button>
+      {/* ===== Header ===== */}
+      <div className="flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-indigo-700 flex items-center gap-3">
+            <CalendarDays className="text-indigo-600 w-7 h-7" />
+            Attendance Calendar
+          </h1>
+          <p className="text-gray-600">
+            View attendance, leave requests, and work-from-home requests.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          {/* Request Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="bg-indigo-600 hover:bg-indigo-700 text-white flex items-center gap-2">
+                Request <ChevronDown className="w-4 h-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-60">
+              <DropdownMenuItem
+                onClick={() =>
+                  router.push(`/employeedashboard/${id}/attendance/leave-request`)
+                }
+              >
+                Leave Request
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() =>
+                  router.push(`/employeedashboard/${id}/attendance/wfh-request`)
+                }
+              >
+                Work From Home Request
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() =>
+                  router.push(`/employeedashboard/${id}/attendance/halfday-request`)
+                }
+              >
+                Half Day Request
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() =>
+                  router.push(`/employeedashboard/${id}/attendance/document-request`)
+                }
+              >
+                Document Request
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* Back Button */}
+          <motion.div whileHover={{ scale: 1.05 }}>
+            <Button
+              onClick={() => router.push(`/employeedashboard`)}
+              className="bg-gray-200 text-gray-800 hover:bg-gray-300"
+            >
+              ← Back
+            </Button>
+          </motion.div>
+        </div>
       </div>
 
-      {/* Summary Card */}
-      <Card className="shadow-md border border-gray-200">
+      {/* ===== Calendar ===== */}
+      <Card className="shadow-md border border-gray-200 p-4">
         <CardHeader>
-          <CardTitle>Employee Details</CardTitle>
-        </CardHeader>
-        <CardContent className="text-gray-700 space-y-2">
-          <p><strong>Name:</strong> {attendance.name}</p>
-          <p><strong>Department:</strong> {attendance.department}</p>
-          <p><strong>Total Working Days:</strong> {attendance.totalDays}</p>
-          <p><strong>Attendance Rate:</strong> {percentage}%</p>
-          <div className="flex gap-2 mt-2">
-            <Badge className="bg-green-100 text-green-700">
-              Present: {attendance.presentDays}
-            </Badge>
-            <Badge className="bg-red-100 text-red-700">
-              Absent: {attendance.absentDays}
-            </Badge>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Attendance Log */}
-      <Card className="shadow-md border border-gray-200">
-        <CardHeader>
-          <CardTitle>Daily Attendance</CardTitle>
+          <CardTitle>Monthly Attendance</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {attendance.records.map((record, index) => (
-              <motion.div
-                key={index}
-                className={`p-3 border rounded-lg shadow-sm ${
-                  record.status === "Present"
-                    ? "bg-green-50 border-green-200 hover:shadow-green-200"
-                    : "bg-red-50 border-red-200 hover:shadow-red-200"
-                } transition-all duration-300`}
-                whileHover={{ scale: 1.03 }}
-              >
-                <p className="font-medium">{record.date}</p>
-                <Badge
-                  className={`${
-                    record.status === "Present"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
-                  }`}
-                >
-                  {record.status}
-                </Badge>
-              </motion.div>
-            ))}
+          <div className="h-[700px]">
+            <FullCalendar
+              plugins={[dayGridPlugin, interactionPlugin]}
+              initialView="dayGridMonth"
+              height="100%"
+              events={events}
+              dayCellDidMount={(info) => {
+                const record = attendance.records.find(
+                  (r) => r.date === info.date.toISOString().split("T")[0]
+                );
+                if (record) {
+                  info.el.style.color =
+                    record.status === "Present" ? "#16a34a" : "#dc2626";
+                  info.el.style.fontWeight = "bold";
+                }
+              }}
+            />
           </div>
         </CardContent>
       </Card>

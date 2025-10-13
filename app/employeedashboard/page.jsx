@@ -24,7 +24,7 @@ export default function EmployeeDashboardMain() {
 
   const [employee, setEmployee] = useState({
     id: 101,
-    name: "Alice Johnson",
+    name: "Alice",
     department: "Engineering",
     position: "Frontend Developer",
     status: "Active",
@@ -67,7 +67,7 @@ export default function EmployeeDashboardMain() {
       {/* ===== Header ===== */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <h1 className="text-4xl font-extrabold text-indigo-700 flex items-center gap-2">
-          Welcome, {employee.name}
+           Welcome, {employee.name}
         </h1>
         <Badge
           className={`text-sm px-4 py-2 rounded-full font-medium shadow-md ${
@@ -149,7 +149,7 @@ export default function EmployeeDashboardMain() {
           <CardTitle className="text-lg font-semibold">Company Overview</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-gray-700 p-4">
-          <p><strong>Company Name:</strong> Big Buddy Foundation</p>
+          <p><strong>Company Name:</strong> Novapex Infohub</p>
           <p><strong>Mission:</strong> Empowering education and digital learning for underprivileged children.</p>
           <p><strong>Departments:</strong> Engineering, HR, Finance, Training, Operations.</p>
           <p><strong>Achievements:</strong> Launched 15+ learning programs and impacted over 10,000 students globally.</p>
