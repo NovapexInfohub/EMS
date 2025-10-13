@@ -31,17 +31,30 @@
       "static/chunks/main-app.js",
       "static/chunks/app/employeedashboard/[id]/attendance/page.js"
     ],
+<<<<<<< HEAD
     "/employees/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/employees/loading.js"
     ],
     "/employees/page": [
+=======
+    "/employeedashboard/[id]/attendance/leave-request/page": [
+>>>>>>> 81066cad41f38ee78e7d9f20bb3d7fbc516d1e99
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/employees/page.js"
     ],
+<<<<<<< HEAD
     "/attendance/loading": [
+=======
+    "/employeedashboard/[id]/attendance/halfday-request/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/attendance/halfday-request/page.js"
+    ],
+    "/employeedashboard/[id]/attendance/wfh-request/page": [
+>>>>>>> 81066cad41f38ee78e7d9f20bb3d7fbc516d1e99
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/attendance/loading.js"
@@ -49,6 +62,7 @@
     "/attendance/time-tracking/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+<<<<<<< HEAD
       "static/chunks/app/attendance/time-tracking/loading.js"
     ],
     "/attendance/time-tracking/page": [
@@ -75,6 +89,9 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/attendance/page.js"
+=======
+      "static/chunks/app/employeedashboard/[id]/attendance/document-request/page.js"
+>>>>>>> 81066cad41f38ee78e7d9f20bb3d7fbc516d1e99
     ]
   }
 }
