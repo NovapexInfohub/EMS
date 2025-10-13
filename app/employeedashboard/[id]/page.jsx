@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft } from "lucide-react";
+import Navbar from "@/components/Navbar";
 
 export default function EmployeeDashboard() {
   const router = useRouter();
@@ -53,6 +54,8 @@ export default function EmployeeDashboard() {
   };
 
   return (
+  <>
+  <Navbar />
     <main className="min-h-screen bg-gray-50 p-8 space-y-8">
       {/* Back Button */}
       <div>
@@ -131,5 +134,6 @@ export default function EmployeeDashboard() {
         </CardContent>
       </Card>
     </main>
+  </>
   );
 }
