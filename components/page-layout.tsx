@@ -1,22 +1,25 @@
-"use client"
+"use client";
 
-import { usePathname } from "next/navigation"
-import { Navigation } from "@/components/navigation"
+import { usePathname } from "next/navigation";
+import { Navigation } from "@/components/navigation";
+import { Navbar as EmployeeNavbar } from "@/app/employeedashboard/components/navbar"; 
 
 interface PageLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function PageLayout({ children }: PageLayoutProps) {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
-  // Hide navigation for employee dashboard routes
-  const hideNavbar = pathname.startsWith("/employeedashboard")
+  // Show employee navbar for dashboard routes
+  const isEmployeeDashboard = pathname.startsWith("/employeedashboard");
 
   return (
     <div className="min-h-screen bg-background">
-      {!hideNavbar && <Navigation />}
+      {/* ✅ Conditionally render navbar based on path */}
+      {isEmployeeDashboard ? <EmployeeNavbar /> : <Navigation />}
+
       <main className="container mx-auto px-6 py-8">{children}</main>
     </div>
-  )
+  );
 }

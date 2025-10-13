@@ -3006,6 +3006,13 @@ font-weight: 100 900;
       }
     }
   }
+  .hover\:bg-gray-300 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-300);
+      }
+    }
+  }
   .hover\:bg-green-50 {
     &:hover {
       @media (hover: hover) {
@@ -3031,6 +3038,13 @@ font-weight: 100 900;
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-green-700);
+      }
+    }
+  }
+  .hover\:bg-indigo-50 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-indigo-50);
       }
     }
   }
@@ -3341,29 +3355,6 @@ font-weight: 100 900;
       }
     }
   }
-<<<<<<< HEAD
-  .hover\:shadow-green-200 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-shadow-color: oklch(92.5% 0.084 155.995);
-        @supports (color: color-mix(in lab, red, red)) {
-          --tw-shadow-color: color-mix(in oklab, var(--color-green-200) var(--tw-shadow-alpha), transparent);
-        }
-      }
-    }
-  }
-  .hover\:shadow-red-200 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-shadow-color: oklch(88.5% 0.062 18.334);
-        @supports (color: color-mix(in lab, red, red)) {
-          --tw-shadow-color: color-mix(in oklab, var(--color-red-200) var(--tw-shadow-alpha), transparent);
-        }
-      }
-    }
-  }
-=======
->>>>>>> cf983cb7995160f322f5ae6eea5b577c9c510961
   .hover\:group-data-\[collapsible\=offcanvas\]\:bg-sidebar {
     &:hover {
       @media (hover: hover) {

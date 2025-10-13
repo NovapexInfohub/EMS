@@ -21,16 +21,16 @@ const navigationItems = [
       { name: "Reports", href: "/dashboard/reports" },
     ],
   },
-  {
-    name: "Employees",
-    items: [
-      { name: "All Employees", href: "/employees" },
-      //{ name: "Add Employee", href: "/employees/add" },
-      { name: "Departments", href: "/employees/departments" },
-      //{ name: "Profiles", href: "/employees/profiles" },
-      { name: "Payroll", href: "/employees/payroll" },
-    ],
-  },
+//   {
+//     name: "Employees",
+//     items: [
+//       { name: "All Employees", href: "/employees" },
+//       //{ name: "Add Employee", href: "/employees/add" },
+//       { name: "Departments", href: "/employees/departments" },
+//       //{ name: "Profiles", href: "/employees/profiles" },
+//       { name: "Payroll", href: "/employees/payroll" },
+//     ],
+//   },
   {
     name: "Attendance",
     items: [
@@ -47,19 +47,19 @@ const navigationItems = [
       { name: "Reviews", href: "/performance/reviews" },
       { name: "Goals", href: "/performance/goals" },
       { name: "Feedback", href: "/performance/feedback" },
-      { name: "Surveys", href: "/performance/surveys" },
-      { name: "Rewards", href: "/performance/rewards" },
+      //{ name: "Surveys", href: "/performance/surveys" },
+      //{ name: "Rewards", href: "/performance/rewards" },
 
     ],
   },
-  {
-    name: "Settings",
-    items: [
-      { name: "Company", href: "/settings/company" },
-      { name: "Users", href: "/settings/users" },
-      { name: "Security", href: "/settings/security" },
-    ],
-  },
+//   {
+//     name: "Settings",
+//     items: [
+//       { name: "Company", href: "/settings/company" },
+//       { name: "Users", href: "/settings/users" },
+//       { name: "Security", href: "/settings/security" },
+//     ],
+//   },
   {
     name: "Courses",
     items:[
@@ -138,9 +138,9 @@ export function Navbar() {
 
         {/* Right Section */}
         <div className="flex items-center space-x-4">
-          <Button variant="outline" size="sm">
+          {/* <Button variant="outline" size="sm">
             Profile
-          </Button>
+          </Button> */}
 
           {/* Mobile Menu Toggle */}
           <button
