@@ -1,34 +1,7 @@
 {
-<<<<<<< HEAD
-  "/page": "app/page.js",
-  "/employeedashboard/[id]/attendance/page": "app/employeedashboard/[id]/attendance/page.js",
-  "/employees/page": "app/employees/page.js",
-  "/employeedashboard/page": "app/employeedashboard/page.js",
-  "/attendance/time-tracking/page": "app/attendance/time-tracking/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/dashboard/analytics/page": "app/dashboard/analytics/page.js",
-  "/attendance/leave-requests/page": "app/attendance/leave-requests/page.js",
-  "/attendance/page": "app/attendance/page.js"
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-  "/employeedashboard/page": "app/employeedashboard/page.js"
-=======
   "/_not-found/page": "app/_not-found/page.js",
   "/dashboard/page": "app/dashboard/page.js",
->>>>>>> bcba8f56ac1b9f0e54c4e42d7611c645fffb9c9b
   "/employeedashboard/page": "app/employeedashboard/page.js",
   "/employeedashboard/[id]/attendance/page": "app/employeedashboard/[id]/attendance/page.js",
-  "/employeedashboard/[id]/attendance/leave-request/page": "app/employeedashboard/[id]/attendance/leave-request/page.js",
-<<<<<<< HEAD
-  "/employeedashboard/[id]/attendance/halfday-request/page": "app/employeedashboard/[id]/attendance/halfday-request/page.js",
-  "/employeedashboard/[id]/attendance/document-request/page": "app/employeedashboard/[id]/attendance/document-request/page.js",
-  "/employeedashboard/[id]/attendance/wfh-request/page": "app/employeedashboard/[id]/attendance/wfh-request/page.js"
-=======
-  "/employeedashboard/[id]/attendance/wfh-request/page": "app/employeedashboard/[id]/attendance/wfh-request/page.js",
-  "/employeedashboard/[id]/performance/page": "app/employeedashboard/[id]/performance/page.js"
->>>>>>> cf983cb7995160f322f5ae6eea5b577c9c510961
->>>>>>> bcba8f56ac1b9f0e54c4e42d7611c645fffb9c9b
->>>>>>> 81066cad41f38ee78e7d9f20bb3d7fbc516d1e99
+  "/employeedashboard/[id]/attendance/request-form/page": "app/employeedashboard/[id]/attendance/request-form/page.js"
 }

@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, Plus } from "lucide-react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -15,6 +15,7 @@ export default function EmployeeAttendancePage() {
   const id = params?.id;
   const router = useRouter();
 
+  // Static demo data
   const [attendance] = useState({
     records: [
       { date: "2025-10-01", status: "Present" },
@@ -35,34 +36,11 @@ export default function EmployeeAttendancePage() {
     textColor: "white",
   }));
 
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
-  const [showOtherRequests, setShowOtherRequests] = useState(false);
-  const menuRef = useRef(null);
+  const [hoveredDate, setHoveredDate] = useState(null);
+  const today = new Date().toISOString().split("T")[0];
 
-  // Close popup when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setSelectedDate(null);
-        setShowOtherRequests(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
-
-  // Handle calendar date click
-  const handleDateClick = (info) => {
-    const rect = info.dayEl.getBoundingClientRect();
-
-    setMenuPosition({
-      x: rect.left + window.scrollX + rect.width / 2,
-      y: rect.top + window.scrollY - 10,
-    });
-
-    setSelectedDate(info.dateStr);
-    setShowOtherRequests(false);
+  const handlePlusClick = (date) => {
+    router.push(`/employeedashboard/${id}/attendance/request-form?date=${date}`);
   };
 
   return (
@@ -80,7 +58,7 @@ export default function EmployeeAttendancePage() {
             Attendance Calendar
           </h1>
           <p className="text-gray-600">
-            Click on any date to apply for Leave or Other Requests.
+            Hover on a future date to create a new request.
           </p>
         </div>
 
@@ -106,96 +84,33 @@ export default function EmployeeAttendancePage() {
               initialView="dayGridMonth"
               height="100%"
               events={events}
-              dateClick={handleDateClick}
+              dayCellContent={(arg) => {
+                const date = arg.date.toISOString().split("T")[0];
+                const isHovered = hoveredDate === date;
+                const isFutureOrToday = date >= today;
+
+                return (
+                  <div
+                    onMouseEnter={() => setHoveredDate(date)}
+                    onMouseLeave={() => setHoveredDate(null)}
+                    className="relative w-full h-full flex flex-col justify-start items-start p-1"
+                  >
+                    <span className="text-sm">{arg.dayNumberText}</span>
+
+                    {/* Plus icon for new request */}
+                    {isHovered && isFutureOrToday && (
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        onClick={() => handlePlusClick(date)}
+                        className="absolute bottom-1 right-1 w-6 h-6 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-md flex items-center justify-center transition-all"
+                      >
+                        <Plus className="w-3 h-3" />
+                      </motion.button>
+                    )}
+                  </div>
+                );
+              }}
             />
-
-            {/* ===== Floating Dropdown ===== */}
-            {selectedDate && (
-              <div
-                ref={menuRef}
-                style={{
-                  position: "absolute",
-                  top: menuPosition.y - 100,
-                  left: menuPosition.x - 120,
-                  zIndex: 1000,
-                }}
-              >
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8, y: -10 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.25 }}
-                  className="bg-white shadow-xl border border-gray-200 rounded-lg p-3 w-64"
-                >
-                  <p className="text-sm text-gray-700 mb-2 font-medium text-center">
-                    Requests for <span className="text-indigo-600">{selectedDate}</span>
-                  </p>
-
-                  {!showOtherRequests ? (
-                    <>
-                      {/* Leave Request */}
-                      <Button
-                        className="w-full text-left justify-start bg-blue-100 text-blue-800 hover:bg-blue-200 mb-1"
-                        onClick={() =>
-                          router.push(
-                            `/employeedashboard/${id}/attendance/leave-request`
-                          )
-                        }
-                      >
-                        Leave Request
-                      </Button>
-
-                      {/* Other Requests */}
-                      <Button
-                        className="w-full text-left justify-start bg-blue-100 text-blue-800 hover:bg-blue-200"
-                        onClick={() => setShowOtherRequests(true)}
-                      >
-                        Other Requests →
-                      </Button>
-                    </>
-                  ) : (
-                    <>
-                      <Button
-                        className="w-full text-left justify-start bg-blue-100 text-blue-800 hover:bg-blue-200 mb-1"
-                        onClick={() =>
-                          router.push(
-                            `/employeedashboard/${id}/attendance/halfday-request`
-                          )
-                        }
-                      >
-                        Half Day Request
-                      </Button>
-                      <Button
-                        className="w-full text-left justify-start bg-blue-100 text-blue-800 hover:bg-blue-200 mb-1"
-                        onClick={() =>
-                          router.push(
-                            `/employeedashboard/${id}/attendance/wfh-request`
-                          )
-                        }
-                      >
-                        Work From Home
-                      </Button>
-                      <Button
-                        className="w-full text-left justify-start bg-blue-100 text-blue-800 hover:bg-blue-200 mb-1"
-                        onClick={() =>
-                          router.push(
-                            `/employeedashboard/${id}/attendance/document-request`
-                          )
-                        }
-                      >
-                        Document Request
-                      </Button>
-                      <Button
-                        variant="outline"
-                        className="w-full mt-2 text-left justify-start"
-                        onClick={() => setShowOtherRequests(false)}
-                      >
-                        ← Back
-                      </Button>
-                    </>
-                  )}
-                </motion.div>
-              </div>
-            )}
           </div>
         </CardContent>
       </Card>
