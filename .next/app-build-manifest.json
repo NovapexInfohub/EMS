@@ -31,67 +31,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/employeedashboard/[id]/attendance/page.js"
     ],
-<<<<<<< HEAD
-    "/employees/loading": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employees/loading.js"
-    ],
-    "/employees/page": [
-=======
     "/employeedashboard/[id]/attendance/leave-request/page": [
->>>>>>> 81066cad41f38ee78e7d9f20bb3d7fbc516d1e99
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/employees/page.js"
+      "static/chunks/app/employeedashboard/[id]/attendance/leave-request/page.js"
     ],
-<<<<<<< HEAD
-    "/attendance/loading": [
-=======
-    "/employeedashboard/[id]/attendance/halfday-request/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/attendance/halfday-request/page.js"
-    ],
-    "/employeedashboard/[id]/attendance/wfh-request/page": [
->>>>>>> 81066cad41f38ee78e7d9f20bb3d7fbc516d1e99
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/attendance/loading.js"
-    ],
-    "/attendance/time-tracking/loading": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-<<<<<<< HEAD
-      "static/chunks/app/attendance/time-tracking/loading.js"
-    ],
-    "/attendance/time-tracking/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/attendance/time-tracking/page.js"
-    ],
-    "/dashboard/analytics/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/analytics/page.js"
-    ],
-    "/attendance/leave-requests/loading": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/attendance/leave-requests/loading.js"
-    ],
-    "/attendance/leave-requests/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/attendance/leave-requests/page.js"
-    ],
-    "/attendance/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/attendance/page.js"
-=======
-      "static/chunks/app/employeedashboard/[id]/attendance/document-request/page.js"
->>>>>>> 81066cad41f38ee78e7d9f20bb3d7fbc516d1e99
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

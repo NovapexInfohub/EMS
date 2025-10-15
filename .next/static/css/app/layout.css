@@ -44,7 +44,6 @@ font-weight: 100 900;
     --color-orange-600: oklch(64.6% 0.222 41.116);
     --color-yellow-50: oklch(98.7% 0.026 102.212);
     --color-yellow-100: oklch(97.3% 0.071 103.193);
-    --color-yellow-200: oklch(94.5% 0.129 101.54);
     --color-yellow-400: oklch(85.2% 0.199 91.936);
     --color-yellow-500: oklch(79.5% 0.184 86.047);
     --color-yellow-600: oklch(68.1% 0.162 75.834);
@@ -69,21 +68,16 @@ font-weight: 100 900;
     --color-blue-800: oklch(42.4% 0.199 265.638);
     --color-indigo-50: oklch(96.2% 0.018 272.314);
     --color-indigo-100: oklch(93% 0.034 272.788);
-    --color-indigo-200: oklch(87% 0.065 274.039);
     --color-indigo-500: oklch(58.5% 0.233 277.117);
     --color-indigo-600: oklch(51.1% 0.262 276.966);
     --color-indigo-700: oklch(45.7% 0.24 277.023);
-    --color-indigo-800: oklch(39.8% 0.195 277.366);
     --color-purple-50: oklch(97.7% 0.014 308.299);
     --color-purple-100: oklch(94.6% 0.033 307.174);
-    --color-purple-200: oklch(90.2% 0.063 306.703);
     --color-purple-500: oklch(62.7% 0.265 303.9);
     --color-purple-600: oklch(55.8% 0.288 302.321);
     --color-purple-800: oklch(43.8% 0.218 303.724);
     --color-pink-100: oklch(94.8% 0.028 342.258);
-    --color-pink-200: oklch(89.9% 0.061 343.231);
     --color-pink-600: oklch(59.2% 0.249 0.584);
-    --color-pink-800: oklch(45.9% 0.187 3.815);
     --color-gray-50: oklch(98.5% 0.002 247.839);
     --color-gray-100: oklch(96.7% 0.003 264.542);
     --color-gray-200: oklch(92.8% 0.006 264.531);
@@ -307,9 +301,6 @@ font-weight: 100 900;
   }
   .invisible {
     visibility: hidden;
-  }
-  .visible {
-    visibility: visible;
   }
   .sr-only {
     position: absolute;
@@ -875,9 +866,6 @@ font-weight: 100 900;
   }
   .w-56 {
     width: calc(var(--spacing) * 56);
-  }
-  .w-60 {
-    width: calc(var(--spacing) * 60);
   }
   .w-64 {
     width: calc(var(--spacing) * 64);
@@ -2073,9 +2061,6 @@ font-weight: 100 900;
   .text-indigo-700 {
     color: var(--color-indigo-700);
   }
-  .text-indigo-800 {
-    color: var(--color-indigo-800);
-  }
   .text-muted-foreground {
     color: var(--muted-foreground);
   }
@@ -2084,9 +2069,6 @@ font-weight: 100 900;
   }
   .text-pink-600 {
     color: var(--color-pink-600);
-  }
-  .text-pink-800 {
-    color: var(--color-pink-800);
   }
   .text-popover-foreground {
     color: var(--popover-foreground);
@@ -2102,9 +2084,6 @@ font-weight: 100 900;
   }
   .text-purple-600 {
     color: var(--color-purple-600);
-  }
-  .text-purple-800 {
-    color: var(--color-purple-800);
   }
   .text-red-500 {
     color: var(--color-red-500);
@@ -3052,13 +3031,6 @@ font-weight: 100 900;
       }
     }
   }
-  .hover\:bg-green-200 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-green-200);
-      }
-    }
-  }
   .hover\:bg-green-600 {
     &:hover {
       @media (hover: hover) {
@@ -3073,10 +3045,6 @@ font-weight: 100 900;
       }
     }
   }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 81066cad41f38ee78e7d9f20bb3d7fbc516d1e99
   .hover\:bg-indigo-50 {
     &:hover {
       @media (hover: hover) {
@@ -3084,18 +3052,6 @@ font-weight: 100 900;
       }
     }
   }
-<<<<<<< HEAD
-=======
-  .hover\:bg-indigo-200 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-indigo-200);
-      }
-    }
-  }
-=======
->>>>>>> bcba8f56ac1b9f0e54c4e42d7611c645fffb9c9b
->>>>>>> 81066cad41f38ee78e7d9f20bb3d7fbc516d1e99
   .hover\:bg-indigo-700 {
     &:hover {
       @media (hover: hover) {
@@ -3117,13 +3073,6 @@ font-weight: 100 900;
         @supports (color: color-mix(in lab, red, red)) {
           background-color: color-mix(in oklab, var(--muted) 50%, transparent);
         }
-      }
-    }
-  }
-  .hover\:bg-pink-200 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-pink-200);
       }
     }
   }
@@ -3151,13 +3100,6 @@ font-weight: 100 900;
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-purple-50);
-      }
-    }
-  }
-  .hover\:bg-purple-200 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-purple-200);
       }
     }
   }
@@ -3230,13 +3172,6 @@ font-weight: 100 900;
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-yellow-100);
-      }
-    }
-  }
-  .hover\:bg-yellow-200 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-yellow-200);
       }
     }
   }
