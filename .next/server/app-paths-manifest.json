@@ -1,7 +1,13 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/dashboard/page": "app/dashboard/page.js",
+<<<<<<< HEAD
   "/employeedashboard/[id]/attendance/page": "app/employeedashboard/[id]/attendance/page.js",
   "/employeedashboard/page": "app/employeedashboard/page.js",
   "/employeedashboard/[id]/attendance/leave-request/page": "app/employeedashboard/[id]/attendance/leave-request/page.js"
+=======
+  "/employeedashboard/page": "app/employeedashboard/page.js",
+  "/employeedashboard/[id]/attendance/page": "app/employeedashboard/[id]/attendance/page.js",
+  "/employeedashboard/[id]/attendance/request-form/page": "app/employeedashboard/[id]/attendance/request-form/page.js"
+>>>>>>> 0b3aff673fe97581b7e56b5ae5525af164e59437
 }
