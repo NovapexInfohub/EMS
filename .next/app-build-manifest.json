@@ -21,35 +21,9 @@
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/page.js"
     ],
-    "/employeedashboard/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/page.js"
-    ],
-    "/employeedashboard/[id]/attendance/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/attendance/page.js"
-    ],
-<<<<<<< HEAD
-    "/employeedashboard/[id]/attendance/leave-request/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/attendance/leave-request/page.js"
-    ],
     "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-=======
-    "/employeedashboard/[id]/attendance/request-form/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/attendance/request-form/page.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
->>>>>>> 0b3aff673fe97581b7e56b5ae5525af164e59437
       "static/chunks/app/_not-found/page.js"
     ]
   }
