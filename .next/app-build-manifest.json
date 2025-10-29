@@ -11,20 +11,50 @@
       "static/chunks/main-app.js",
       "static/chunks/app/loading.js"
     ],
-    "/page": [
+    "/dashboard/analytics/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/dashboard/analytics/page.js"
     ],
-    "/dashboard/page": [
+    "/dashboard/reports/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/page.js"
+      "static/chunks/app/dashboard/reports/loading.js"
     ],
-    "/_not-found/page": [
+    "/dashboard/reports/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/dashboard/reports/page.js"
+    ],
+    "/employees/loading": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employees/loading.js"
+    ],
+    "/employees/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employees/page.js"
+    ],
+    "/employees/profiles/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employees/profiles/page.js"
+    ],
+    "/attendance/loading": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/attendance/loading.js"
+    ],
+    "/attendance/reports/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/attendance/reports/page.js"
+    ],
+    "/employees/payroll/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employees/payroll/page.js"
     ]
   }
 }

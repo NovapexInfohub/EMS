@@ -79,8 +79,8 @@ export function Navigation() {
     <nav className="bg-card border-b border-border px-6 py-4">
       <div className="flex items-center justify-between">
         {/* Logo */}
-        <Link href="/dashboard" className="text-xl font-bold text-primary">
-          ERP Portal
+        <Link href="/dashboard" className=" font-bold">
+          <h1 className="text-[#0077ff] font-bold text-lg tracking-wide">ERP PORTAL</h1>
         </Link>
 
         {/* Desktop Navigation */}
