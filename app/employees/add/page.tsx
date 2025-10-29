@@ -1,15 +1,14 @@
 "use client"
 
 import type React from "react"
-
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
 
 export default function AddEmployeePage() {
   const router = useRouter()
@@ -38,36 +37,48 @@ export default function AddEmployeePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 2000))
-
     setIsSubmitting(false)
     router.push("/employees")
   }
 
   return (
-    <div className="space-y-8 animate-in fade-in-50 duration-500">
-      <div className="flex items-center justify-between">
+    <main className="min-h-screen bg-gray-50">
+
+      <div className="flex justify-between items-center px-10 py-8 bg-white border-b">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Add New Employee</h1>
-          <p className="text-muted-foreground mt-2">Create a new employee profile with all necessary information</p>
+          <h2 className="text-2xl font-semibold text-gray-900">Add New Employee</h2>
+          <p className="text-gray-500 text-sm">
+            Create a new employee profile with all necessary information
+          </p>
         </div>
-        <Button variant="outline" onClick={() => router.back()}>
-          Cancel
-        </Button>
+        <div className="flex gap-3">
+          <Button variant="outline" onClick={() => router.back()}>
+            Cancel
+          </Button>
+          <Button type="submit" form="employee-form" disabled={isSubmitting}>
+            {isSubmitting ? "Submitting..." : "Submit"}
+          </Button>
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+      {/* ===== Form Section ===== */}
+      <form
+        id="employee-form"
+        onSubmit={handleSubmit}
+        className="max-w-6xl mx-auto px-10 py-10 space-y-10"
+      >
         {/* Personal Information */}
-        <Card className="animate-in slide-in-from-top-5">
+        <Card className="border border-gray-200 shadow-sm">
           <CardHeader>
             <CardTitle>Personal Information</CardTitle>
-            <CardDescription>Basic employee details and contact information</CardDescription>
+            <CardDescription>
+              Basic employee details and contact information
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="firstName">First Name *</Label>
                 <Input
                   id="firstName"
@@ -77,7 +88,7 @@ export default function AddEmployeePage() {
                   required
                 />
               </div>
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="lastName">Last Name *</Label>
                 <Input
                   id="lastName"
@@ -90,7 +101,7 @@ export default function AddEmployeePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="email">Email Address *</Label>
                 <Input
                   id="email"
@@ -101,41 +112,45 @@ export default function AddEmployeePage() {
                   required
                 />
               </div>
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="phone">Phone Number</Label>
                 <Input
                   id="phone"
                   value={formData.phone}
                   onChange={(e) => handleInputChange("phone", e.target.value)}
-                  placeholder="+1 (555) 123-4567"
+                  placeholder="+91 9123456789"
                 />
               </div>
             </div>
 
-            <div className="space-y-2">
+            <div>
               <Label htmlFor="address">Address</Label>
               <Textarea
                 id="address"
                 value={formData.address}
                 onChange={(e) => handleInputChange("address", e.target.value)}
                 placeholder="Enter full address"
-                rows={3}
               />
             </div>
           </CardContent>
         </Card>
 
         {/* Employment Details */}
-        <Card className="animate-in slide-in-from-top-5" style={{ animationDelay: "200ms" }}>
+        <Card className="border border-gray-200 shadow-sm">
           <CardHeader>
             <CardTitle>Employment Details</CardTitle>
-            <CardDescription>Job-related information and organizational structure</CardDescription>
+            <CardDescription>
+              Job-related information and organizational structure
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="department">Department *</Label>
-                <Select value={formData.department} onValueChange={(value) => handleInputChange("department", value)}>
+                <Select
+                  value={formData.department}
+                  onValueChange={(value) => handleInputChange("department", value)}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Select department" />
                   </SelectTrigger>
@@ -148,7 +163,7 @@ export default function AddEmployeePage() {
                   </SelectContent>
                 </Select>
               </div>
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="position">Position *</Label>
                 <Input
                   id="position"
@@ -161,16 +176,16 @@ export default function AddEmployeePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="salary">Annual Salary</Label>
                 <Input
                   id="salary"
                   value={formData.salary}
                   onChange={(e) => handleInputChange("salary", e.target.value)}
-                  placeholder="$75,000"
+                  placeholder="₹7,50,000"
                 />
               </div>
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="startDate">Start Date *</Label>
                 <Input
                   id="startDate"
@@ -185,14 +200,16 @@ export default function AddEmployeePage() {
         </Card>
 
         {/* Emergency Contact */}
-        <Card className="animate-in slide-in-from-top-5" style={{ animationDelay: "400ms" }}>
+        <Card className="border border-gray-200 shadow-sm">
           <CardHeader>
             <CardTitle>Emergency Contact</CardTitle>
-            <CardDescription>Emergency contact information for the employee</CardDescription>
+            <CardDescription>
+              Emergency contact information for the employee
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="emergencyContact">Emergency Contact Name</Label>
                 <Input
                   id="emergencyContact"
@@ -201,50 +218,29 @@ export default function AddEmployeePage() {
                   placeholder="Contact person name"
                 />
               </div>
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="emergencyPhone">Emergency Contact Phone</Label>
                 <Input
                   id="emergencyPhone"
                   value={formData.emergencyPhone}
                   onChange={(e) => handleInputChange("emergencyPhone", e.target.value)}
-                  placeholder="+1 (555) 987-6543"
+                  placeholder="+91 9876543210"
                 />
               </div>
             </div>
 
-            <div className="space-y-2">
+            <div>
               <Label htmlFor="notes">Additional Notes</Label>
               <Textarea
                 id="notes"
                 value={formData.notes}
                 onChange={(e) => handleInputChange("notes", e.target.value)}
                 placeholder="Any additional information or notes about the employee"
-                rows={4}
               />
             </div>
           </CardContent>
         </Card>
-
-        {/* Submit Button */}
-        <div
-          className="flex justify-end space-x-4 animate-in slide-in-from-bottom-5"
-          style={{ animationDelay: "600ms" }}
-        >
-          <Button type="button" variant="outline" onClick={() => router.back()}>
-            Cancel
-          </Button>
-          <Button type="submit" disabled={isSubmitting} className="min-w-32">
-            {isSubmitting ? (
-              <div className="flex items-center space-x-2">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                <span>Creating...</span>
-              </div>
-            ) : (
-              "Create Employee"
-            )}
-          </Button>
-        </div>
       </form>
-    </div>
+    </main>
   )
 }
