@@ -1,7 +1,7 @@
 {
+  "/employees/profiles/page": "app/employees/profiles/page.js",
+  "/dashboard/reports/page": "app/dashboard/reports/page.js",
   "/employees/page": "app/employees/page.js",
   "/employees/payroll/page": "app/employees/payroll/page.js",
-  "/dashboard/reports/page": "app/dashboard/reports/page.js",
-  "/employees/profiles/page": "app/employees/profiles/page.js",
   "/attendance/reports/page": "app/attendance/reports/page.js"
 }
