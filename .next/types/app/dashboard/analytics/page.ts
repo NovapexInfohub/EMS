@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // File: C:\Users\OWNER\Desktop\Nova\EMS\app\dashboard\analytics\page.tsx
+=======
+// File: G:\NovapexERP_nileshsir\EMS\app\dashboard\analytics\page.tsx
+>>>>>>> 580675ad65682799638b4d361b2570b8094c6d6d
 import * as entry from '../../../../../app/dashboard/analytics/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

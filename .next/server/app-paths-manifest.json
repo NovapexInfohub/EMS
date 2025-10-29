@@ -1,8 +1,16 @@
 {
+<<<<<<< HEAD
   "/api/chatbot/route": "app/api/chatbot/route.js",
   "/dashboard/reports/page": "app/dashboard/reports/page.js",
   "/employees/profiles/page": "app/employees/profiles/page.js",
   "/courses/engineering/page": "app/courses/engineering/page.js",
   "/attendance/reports/page": "app/attendance/reports/page.js",
   "/dashboard/page": "app/dashboard/page.js"
+=======
+  "/employees/page": "app/employees/page.js",
+  "/employees/payroll/page": "app/employees/payroll/page.js",
+  "/dashboard/reports/page": "app/dashboard/reports/page.js",
+  "/employees/profiles/page": "app/employees/profiles/page.js",
+  "/attendance/reports/page": "app/attendance/reports/page.js"
+>>>>>>> 580675ad65682799638b4d361b2570b8094c6d6d
 }

@@ -11,14 +11,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/loading.js"
     ],
-    "/page": [
+    "/dashboard/analytics/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/dashboard/analytics/page.js"
     ],
-    "/dashboard/page": [
+    "/dashboard/reports/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+<<<<<<< HEAD
       "static/chunks/app/dashboard/page.js"
     ],
     "/dashboard/analytics/page": [
@@ -29,6 +30,8 @@
     "/dashboard/reports/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+=======
+>>>>>>> 580675ad65682799638b4d361b2570b8094c6d6d
       "static/chunks/app/dashboard/reports/loading.js"
     ],
     "/dashboard/reports/page": [
@@ -46,21 +49,27 @@
       "static/chunks/main-app.js",
       "static/chunks/app/employees/page.js"
     ],
+<<<<<<< HEAD
     "/employees/add/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/employees/add/page.js"
     ],
+=======
+>>>>>>> 580675ad65682799638b4d361b2570b8094c6d6d
     "/employees/profiles/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/employees/profiles/page.js"
     ],
+<<<<<<< HEAD
     "/courses/engineering/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/courses/engineering/page.js"
     ],
+=======
+>>>>>>> 580675ad65682799638b4d361b2570b8094c6d6d
     "/attendance/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -71,10 +80,17 @@
       "static/chunks/main-app.js",
       "static/chunks/app/attendance/reports/page.js"
     ],
+<<<<<<< HEAD
     "/api/chatbot/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/chatbot/route.js"
+=======
+    "/employees/payroll/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employees/payroll/page.js"
+>>>>>>> 580675ad65682799638b4d361b2570b8094c6d6d
     ]
   }
 }

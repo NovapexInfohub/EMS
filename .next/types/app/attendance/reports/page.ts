@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // File: C:\Users\OWNER\Desktop\Nova\EMS\app\attendance\reports\page.jsx
+=======
+// File: G:\NovapexERP_nileshsir\EMS\app\attendance\reports\page.jsx
+>>>>>>> 580675ad65682799638b4d361b2570b8094c6d6d
 import * as entry from '../../../../../app/attendance/reports/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
