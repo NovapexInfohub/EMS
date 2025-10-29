@@ -69,6 +69,9 @@ export default function RequestFormPage() {
                 <SelectItem value="Half Day Request">Half Day Request</SelectItem>
                 <SelectItem value="Work From Home">Work From Home</SelectItem>
                 <SelectItem value="Document Request">Document Request</SelectItem>
+                <SelectItem value="Attendance Regularisation">
+                  Attendance Regularisation
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -216,6 +219,45 @@ export default function RequestFormPage() {
                       placeholder="Additional Notes (optional)"
                       onChange={handleChange}
                       className="min-h-[100px] text-lg"
+                    />
+                  </>
+                )}
+
+                {/* ===== Attendance Regularisation ===== */}
+                {requestType === "Attendance Regularisation" && (
+                  <>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      <Input
+                        name="date"
+                        type="date"
+                        defaultValue={date !== "Not Selected" ? date : ""}
+                        onChange={handleChange}
+                        required
+                        className="h-14 text-lg"
+                      />
+                      <Input
+                        name="checkIn"
+                        type="time"
+                        placeholder="Check-In Time"
+                        onChange={handleChange}
+                        required
+                        className="h-14 text-lg"
+                      />
+                      <Input
+                        name="checkOut"
+                        type="time"
+                        placeholder="Check-Out Time"
+                        onChange={handleChange}
+                        required
+                        className="h-14 text-lg"
+                      />
+                    </div>
+                    <Textarea
+                      name="reason"
+                      placeholder="Reason for attendance regularisation (e.g., missed punch)"
+                      onChange={handleChange}
+                      required
+                      className="min-h-[140px] text-lg"
                     />
                   </>
                 )}
