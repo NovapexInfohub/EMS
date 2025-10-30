@@ -1,138 +1,218 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { FaStar, FaUser, FaClock, FaSearch } from "react-icons/fa"
 
 const coursesData = [
   {
+    title: "Artificial Intelligence and Machine Learning",
+    image:
+      "https://images.unsplash.com/photo-1650530415027-dc9199f473ec?q=80&w=1333&auto=format&fit=crop",
+    instructor: "John Dalton",
+    rating: 4.8,
+    enrolled: "1.2k",
+    duration: "8 Weeks",
     department: "Engineering",
-    image: "https://images.unsplash.com/photo-1650530415027-dc9199f473ec?q=80&w=1333&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    courses: [
-      {
-        title: "Full Stack Web Development",
-        description: "Learn modern web development using React, Node.js, and databases.",
-        duration: "12 Weeks",
-        level: "Intermediate",
-      },
-      {
-        title: "DevOps Fundamentals",
-        description: "Introduction to CI/CD, Docker, Kubernetes, and cloud deployment.",
-        duration: "8 Weeks",
-        level: "Beginner",
-      },
-    ],
   },
   {
-    department: "Human Resources",
-    image: "https://images.unsplash.com/photo-1531535807748-218331acbcb4?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    courses: [
-      {
-        title: "HR Analytics",
-        description: "Use data-driven approaches to improve HR decision-making.",
-        duration: "6 Weeks",
-        level: "Intermediate",
-      },
-      {
-        title: "Talent Acquisition Strategies",
-        description: "Master recruitment, onboarding, and retention best practices.",
-        duration: "4 Weeks",
-        level: "Beginner",
-      },
-    ],
+    title: "Digital Marketing with AI",
+    image:
+      "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1470&auto=format&fit=crop",
+    instructor: "Mike Tyson",
+    rating: 4.7,
+    enrolled: "980",
+    duration: "6 Weeks",
+    department: "Marketing",
   },
   {
-    department: "Finance",
-    image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    courses: [
-      {
-        title: "Corporate Finance Essentials",
-        description: "Understand financial statements, budgeting, and forecasting.",
-        duration: "10 Weeks",
-        level: "Intermediate",
-      },
-      {
-        title: "Payroll Management",
-        description: "Learn payroll processing, compliance, and reporting.",
-        duration: "5 Weeks",
-        level: "Beginner",
-      },
-    ],
+    title: "Web Development",
+    image:
+      "https://images.unsplash.com/photo-1529101091764-c3526daf38fe?q=80&w=1470&auto=format&fit=crop",
+    instructor: "Lily Adams",
+    rating: 4.6,
+    enrolled: "1.5k",
+    duration: "9 Weeks",
+    department: "Engineering",
   },
   {
-    department: "Management",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    courses: [
-      {
-        title: "Project Management Professional (PMP)",
-        description: "Comprehensive training for PMP certification.",
-        duration: "14 Weeks",
-        level: "Advanced",
-      },
-      {
-        title: "Leadership & Team Building",
-        description: "Develop leadership skills and manage high-performing teams.",
-        duration: "6 Weeks",
-        level: "Intermediate",
-      },
-    ],
+    title: "Mastering B2B & B2C Sales",
+    image:
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1470&auto=format&fit=crop",
+    instructor: "John Dalton",
+    rating: 4.5,
+    enrolled: "840",
+    duration: "7 Weeks",
+    department: "Sales",
+  },
+  {
+    title: "Salesforce CRM Essentials",
+    image:
+      "https://images.unsplash.com/photo-1573495628363-8a1b08a54b5b?q=80&w=1470&auto=format&fit=crop",
+    instructor: "Mike Tyson",
+    rating: 4.4,
+    enrolled: "930",
+    duration: "5 Weeks",
+    department: "Sales",
+  },
+  {
+    title: "Advanced Python Programming",
+    image:
+      "https://images.unsplash.com/photo-1581090465463-1979ff03f8f6?q=80&w=1470&auto=format&fit=crop",
+    instructor: "Lily Adams",
+    rating: 4.9,
+    enrolled: "2.1k",
+    duration: "10 Weeks",
+    department: "Engineering",
   },
 ]
 
 export default function CoursesPage() {
+  const [activeDept, setActiveDept] = useState("All Departments")
+  const [searchTerm, setSearchTerm] = useState("")
+  const departments = ["All Departments", "Engineering", "Sales", "Marketing", "HR", "Finance"]
+
+  const filteredCourses = coursesData.filter((c) => {
+    const matchesDept = activeDept === "All Departments" || c.department === activeDept
+    const matchesSearch = c.title.toLowerCase().includes(searchTerm.toLowerCase())
+    return matchesDept && matchesSearch
+  })
+
   return (
-    <div className="container mx-auto py-12 px-4">
-      <h1 className="text-4xl font-extrabold mb-12 text-center text-blue-500">
-        Department-wise Courses
-      </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {coursesData.map((dept, deptIdx) => (
+    <div className="p-8">
+      {/* Header */}
+      <h1 className="text-2xl font-bold text-gray-900 mb-2">Courses</h1>
+      <p className="text-gray-500 mb-6">
+        Find learning programs designed for your role.
+      </p>
+
+      {/* Search + Filter */}
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+        {/* Search Bar */}
+        <div className="flex items-center w-full md:w-1/3 bg-gray-100 rounded-full px-3 py-2">
+          <FaSearch className="text-gray-500 mr-2 rounded-full" />
+          <Input
+            type="text"
+            placeholder="Search courses..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="bg-transparent border-none focus:ring-0 focus:outline-none text-sm"
+          />
+        </div>
+
+        {/* Department Buttons */}
+        <div className="flex flex-wrap gap-2">
+          {departments.map((dept) => (
+            <Button
+              key={dept}
+              onClick={() => setActiveDept(dept)}
+              className={`px-4 py-2 text-sm rounded-md transition-all ${
+                activeDept === dept
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 text-gray-700 hover:bg-blue-100"
+              }`}
+            >
+              {dept}
+            </Button>
+          ))}
+        </div>
+      </div>
+
+      {/* Course Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {filteredCourses.map((course, idx) => (
           <motion.div
-            key={dept.department}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: deptIdx * 0.2 }}
-            viewport={{ once: true }}
-            className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition-shadow"
+            key={course.title}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.1 }}
+            whileHover={{ scale: 1.03 }}
+            className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all"
           >
-            {/* Department Image */}
-            <div className="relative w-full h-48">
+            <div className="relative h-40 w-full">
               <Image
-                src={dept.image}
-                alt={dept.department}
+                src={course.image}
+                alt={course.title}
                 fill
                 className="object-cover"
               />
             </div>
-
-            {/* Content */}
-            <div className="p-8">
-              <h2 className="text-2xl font-bold mb-6 text-blue-700 border-b pb-2">
-                {dept.department}
-              </h2>
-              <div className="space-y-6">
-                {dept.courses.map((course, idx) => (
-                  <div
-                    key={idx}
-                    className="p-5 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-md transition-all"
-                  >
-                    <h3 className="text-xl font-semibold text-gray-800">
-                      {course.title}
-                    </h3>
-                    <p className="text-gray-600 mt-1">{course.description}</p>
-                    <div className="flex items-center gap-3 mt-4">
-                      <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700">
-                        {course.level}
-                      </span>
-                      <span className="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700">
-                        {course.duration}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+            <div className="p-5">
+              <h3 className="text-lg font-semibold text-gray-800 mb-1">
+                {course.title}
+              </h3>
+              <div className="flex items-center text-sm text-gray-500 mb-2 gap-2">
+                <FaStar className="text-yellow-500" /> {course.rating} | {course.enrolled} Enrolled | {course.duration}
               </div>
+              <div className="flex items-center text-sm text-gray-500 mb-4">
+                <FaUser className="mr-2" /> {course.instructor}
+              </div>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md">
+                View Course
+              </Button>
             </div>
           </motion.div>
         ))}
+      </div>
+
+      {/* Meetings Section */}
+      <div className="mt-12">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold text-gray-800">Meetings</h2>
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white text-sm">
+            Schedule Meeting
+          </Button>
+        </div>
+
+        <div className="flex gap-3 border-b border-gray-200 mb-6">
+          <Button className="text-sm border-b-2 border-blue-600 text-blue-600 rounded-none">
+            Meetings
+          </Button>
+          <Button variant="ghost" className="text-sm text-gray-600">
+            Recorded Sessions
+          </Button>
+        </div>
+
+        {/* Meeting Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {[ 
+            {
+              title: "Introduce new project goals, roles, and timelines.",
+              duration: "40 mins",
+              joined: "45 Joined",
+            },
+            {
+              title: "Evaluate project deliverables and client feedback.",
+              duration: "35 mins",
+              joined: "30 Joined",
+            },
+            {
+              title: "Discuss new technologies, frameworks, or tools to adopt.",
+              duration: "45 mins",
+              joined: "50 Joined",
+            },
+          ].map((meeting, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md p-5"
+            >
+              <h3 className="text-sm font-semibold text-gray-800 mb-3">
+                {meeting.title}
+              </h3>
+              <div className="flex items-center text-sm text-gray-500 mb-3 gap-2">
+                <FaClock /> {meeting.duration} | {meeting.joined}
+              </div>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm">
+                Join Meeting
+              </Button>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   )
