@@ -45,9 +45,12 @@ export default function DashboardPage() {
                 Welcome back! Here's what's happening today
               </p>
             </div>
-            <Button className="bg-[#0077ff] hover:bg-[#0063d1] text-white px-5 py-2 rounded-md">
-              Generate Report
-            </Button>
+        <Link href="/dashboard/reports/generate">
+          <Button className="bg-[#0077ff] hover:bg-[#0063d1] text-white px-5 py-2 rounded-md">
+            Generate Report
+          </Button>
+        </Link>
+
           </div>
 
           {/* Stats Section */}

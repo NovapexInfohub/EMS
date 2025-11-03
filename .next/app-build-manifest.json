@@ -11,86 +11,60 @@
       "static/chunks/main-app.js",
       "static/chunks/app/loading.js"
     ],
-    "/dashboard/analytics/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/analytics/page.js"
+      "static/chunks/app/page.js"
     ],
-    "/dashboard/reports/loading": [
+    "/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-<<<<<<< HEAD
       "static/chunks/app/dashboard/page.js"
     ],
-    "/dashboard/analytics/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/analytics/page.js"
-    ],
     "/dashboard/reports/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-=======
->>>>>>> 580675ad65682799638b4d361b2570b8094c6d6d
       "static/chunks/app/dashboard/reports/loading.js"
     ],
-    "/dashboard/reports/page": [
+    "/dashboard/reports/generate/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/reports/page.js"
+      "static/chunks/app/dashboard/reports/generate/page.js"
     ],
-    "/employees/loading": [
+    "/employeedashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/employees/loading.js"
+      "static/chunks/app/employeedashboard/page.js"
     ],
-    "/employees/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employees/page.js"
-    ],
-<<<<<<< HEAD
-    "/employees/add/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employees/add/page.js"
-    ],
-=======
->>>>>>> 580675ad65682799638b4d361b2570b8094c6d6d
-    "/employees/profiles/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employees/profiles/page.js"
-    ],
-<<<<<<< HEAD
-    "/courses/engineering/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/courses/engineering/page.js"
-    ],
-=======
->>>>>>> 580675ad65682799638b4d361b2570b8094c6d6d
     "/attendance/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/attendance/loading.js"
     ],
-    "/attendance/reports/page": [
+    "/attendance/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/attendance/reports/page.js"
+      "static/chunks/app/attendance/page.js"
     ],
-<<<<<<< HEAD
-    "/api/chatbot/route": [
+    "/performance/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/chatbot/route.js"
-=======
-    "/employees/payroll/page": [
+      "static/chunks/app/performance/loading.js"
+    ],
+    "/performance/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/employees/payroll/page.js"
->>>>>>> 580675ad65682799638b4d361b2570b8094c6d6d
+      "static/chunks/app/performance/page.js"
+    ],
+    "/settings/loading": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/settings/loading.js"
+    ],
+    "/settings/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/settings/page.js"
     ]
   }
 }
