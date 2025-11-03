@@ -11,50 +11,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/loading.js"
     ],
-    "/page": [
+    "/projects/projectprogress/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
-    ],
-    "/dashboard/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/page.js"
-    ],
-    "/performance/loading": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/performance/loading.js"
-    ],
-    "/performance/reviews/loading": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/performance/reviews/loading.js"
-    ],
-    "/performance/reviews/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/performance/reviews/page.js"
+      "static/chunks/app/projects/projectprogress/page.js"
     ],
     "/attendance/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/attendance/loading.js"
-    ],
-    "/attendance/time-tracking/loading": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/attendance/time-tracking/loading.js"
-    ],
-    "/attendance/time-tracking/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/attendance/time-tracking/page.js"
-    ],
-    "/attendance/calendar/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/attendance/calendar/page.js"
     ],
     "/attendance/leave-requests/loading": [
       "static/chunks/webpack.js",
@@ -66,20 +31,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/attendance/leave-requests/page.js"
     ],
-    "/attendance/reports/page": [
+    "/attendance/calendar/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/attendance/reports/page.js"
-    ],
-    "/courses/engineering/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/courses/engineering/page.js"
-    ],
-    "/courses/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/courses/page.js"
+      "static/chunks/app/attendance/calendar/page.js"
     ]
   }
 }

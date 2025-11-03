@@ -1,7 +1,4 @@
 {
-  "/attendance/calendar/page": "app/attendance/calendar/page.js",
-  "/attendance/reports/page": "app/attendance/reports/page.js",
-  "/courses/engineering/page": "app/courses/engineering/page.js",
-  "/attendance/leave-requests/page": "app/attendance/leave-requests/page.js",
-  "/courses/page": "app/courses/page.js"
+  "/projects/projectprogress/page": "app/projects/projectprogress/page.js",
+  "/attendance/calendar/page": "app/attendance/calendar/page.js"
 }
