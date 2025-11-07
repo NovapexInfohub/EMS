@@ -11,30 +11,55 @@
       "static/chunks/main-app.js",
       "static/chunks/app/loading.js"
     ],
-    "/projects/projectprogress/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/projects/projectprogress/page.js"
+      "static/chunks/app/page.js"
     ],
-    "/attendance/loading": [
+    "/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/attendance/loading.js"
+      "static/chunks/app/dashboard/page.js"
     ],
-    "/attendance/leave-requests/loading": [
+    "/employeedashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/attendance/leave-requests/loading.js"
+      "static/chunks/app/employeedashboard/page.js"
     ],
-    "/attendance/leave-requests/page": [
+    "/employeedashboard/[id]/attendance/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/attendance/leave-requests/page.js"
+      "static/chunks/app/employeedashboard/[id]/attendance/page.js"
     ],
-    "/attendance/calendar/page": [
+    "/employeedashboard/[id]/attendance/request-form/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/attendance/calendar/page.js"
+      "static/chunks/app/employeedashboard/[id]/attendance/request-form/page.js"
+    ],
+    "/employeedashboard/[id]/attendance/mark/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/attendance/mark/page.js"
+    ],
+    "/employeedashboard/[id]/attendance/summary/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/attendance/summary/page.js"
+    ],
+    "/employeedashboard/[id]/attendance/workhours/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/attendance/workhours/page.js"
+    ],
+    "/employeedashboard/[id]/attendance/overtime/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/attendance/overtime/page.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

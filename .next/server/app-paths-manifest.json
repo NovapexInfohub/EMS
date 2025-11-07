@@ -1,4 +1,10 @@
 {
-  "/projects/projectprogress/page": "app/projects/projectprogress/page.js",
-  "/attendance/calendar/page": "app/attendance/calendar/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/employeedashboard/page": "app/employeedashboard/page.js",
+  "/employeedashboard/[id]/attendance/page": "app/employeedashboard/[id]/attendance/page.js",
+  "/employeedashboard/[id]/attendance/summary/page": "app/employeedashboard/[id]/attendance/summary/page.js",
+  "/employeedashboard/[id]/attendance/mark/page": "app/employeedashboard/[id]/attendance/mark/page.js",
+  "/employeedashboard/[id]/attendance/request-form/page": "app/employeedashboard/[id]/attendance/request-form/page.js",
+  "/employeedashboard/[id]/attendance/overtime/page": "app/employeedashboard/[id]/attendance/overtime/page.js",
+  "/employeedashboard/[id]/attendance/workhours/page": "app/employeedashboard/[id]/attendance/workhours/page.js"
 }
