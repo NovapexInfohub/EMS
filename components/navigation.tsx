@@ -52,11 +52,11 @@ const navigationItems = [
     ],
   },
   {
-    name: "Settings",
+    name: "Projects",
     items: [
-      { name: "Company", href: "/settings/company" },
-      { name: "Users", href: "/settings/users" },
-      { name: "Security", href: "/settings/security" },
+      
+      { name: "Project Overview", href: "/projects/projectoverview" },
+      { name: "Project Progress", href: "/projects/projectprogress" },
     ],
   },
   {
@@ -66,6 +66,14 @@ const navigationItems = [
       { name: "Marketing", href: "/courses/marketing" },
       { name: "Sales", href: "/courses/sales" },
       { name: "HR", href: "/courses/hr" },
+    ],
+  },
+  {
+    name: "Settings",
+    items: [
+      { name: "Company", href: "/settings/company" },
+      { name: "Users", href: "/settings/users" },
+      { name: "Security", href: "/settings/security" },
     ],
   },
 ]

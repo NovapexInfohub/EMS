@@ -7,9 +7,15 @@ import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import { motion } from "framer-motion";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
   DialogContent,
@@ -23,32 +29,37 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Plus } from "lucide-react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  Tooltip,
+  ResponsiveContainer,
+  LabelList,
+} from "recharts";
 
 export default function AttendanceCalendar() {
+  const data = [
+    { day: "MON", value: 90 },
+    { day: "TUE", value: 85 },
+    { day: "WED", value: 83 },
+    { day: "THU", value: 88 },
+    { day: "FRI", value: 84 },
+    { day: "SAT", value: 80 },
+  ];
+
+  const departments = [
+    { name: "Engineering", percent: 91 },
+    { name: "Marketing", percent: 95 },
+    { name: "Sales", percent: 89 },
+    { name: "HR", percent: 90 },
+  ];
+
   const [events, setEvents] = useState([
-    {
-      title: "Team Meeting",
-      start: new Date().toISOString().split("T")[0],
-      department: "Engineering",
-      description: "Weekly sync-up on project updates.",
-      color: "#2563eb",
-    },
-    {
-      title: "Performance Reviews",
-      start: new Date(Date.now() + 86400000).toISOString().split("T")[0],
-      department: "HR",
-      description: "Quarterly review sessions with HR team.",
-      color: "#16a34a",
-    },
-    {
-      title: "Quarterly Planning",
-      start: new Date(Date.now() + 2 * 86400000).toISOString().split("T")[0],
-      department: "Management",
-      description: "Strategy meeting for Q4 goals.",
-      color: "#f59e0b",
-    },
+    { id: "1", title: "AI Conference", start: "2025-10-03", department: "Engineering", description: "Team research and innovation" },
+    { id: "2", title: "Weekend Festival", start: "2025-10-16", department: "HR", description: "Team bonding activities" },
+    { id: "3", title: "Marketing 2025", start: "2025-10-25", department: "Marketing", description: "Strategy discussion for campaigns" },
+    { id: "4", title: "Design Expo", start: "2025-10-20", department: "Design", description: "Presentation of UI/UX progress" },
   ]);
 
   const [open, setOpen] = useState(false);
@@ -63,16 +74,19 @@ export default function AttendanceCalendar() {
 
   const colorMap = {
     Engineering: "#2563eb",
+    Marketing: "#9333ea",
     HR: "#16a34a",
-    Management: "#f59e0b",
+    Design: "#f97316",
     General: "#6b7280",
   };
 
+  // When user clicks on a date
   const handleDateClick = (info) => {
     setNewEvent({ ...newEvent, date: info.dateStr });
     setOpen(true);
   };
 
+  // When user clicks an event
   const handleEventClick = (info) => {
     const clickedEvent = events.find(
       (event) =>
@@ -88,6 +102,7 @@ export default function AttendanceCalendar() {
     setEditOpen(true);
   };
 
+  // Add event
   const handleAddEvent = () => {
     if (newEvent.title && newEvent.date) {
       setEvents([
@@ -105,6 +120,7 @@ export default function AttendanceCalendar() {
     }
   };
 
+  // Edit event
   const handleEditEvent = () => {
     setEvents(
       events.map((event) =>
@@ -123,6 +139,7 @@ export default function AttendanceCalendar() {
     setEditOpen(false);
   };
 
+  // Delete event
   const handleDeleteEvent = () => {
     setEvents(events.filter((e) => e !== selectedEvent));
     setEditOpen(false);
@@ -130,67 +147,116 @@ export default function AttendanceCalendar() {
 
   return (
     <motion.div
-      className="p-6 space-y-6 relative"
+      className="p-10 bg-white min-h-screen space-y-10"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
       {/* Header */}
-      <Card className="shadow-lg bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-100">
+      <Card className="shadow-md bg-gradient-to-r from-indigo-50 to-blue-50 border-none">
         <CardHeader>
-          <CardTitle className="text-3xl font-bold text-blue-600 flex items-center gap-2">
-            Attendance & Event Calendar
+          <CardTitle className="text-3xl font-bold text-blue-600">
+            Attendance & Progress Overview
           </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-gray-600">
-            Manage employee events, meetings, and reminders in one place.
+            Monitor weekly department performance and manage scheduled events.
           </p>
         </CardContent>
       </Card>
 
-      {/* Calendar */}
-      <div className="bg-white shadow-md rounded-2xl p-4 border border-gray-100">
-        <FullCalendar
-          plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin]}
-          initialView="dayGridMonth"
-          headerToolbar={{
-            left: "prev,next today",
-            center: "title",
-            right: "dayGridMonth,timeGridWeek,listWeek",
-          }}
-          events={events}
-          dateClick={handleDateClick}
-          eventClick={handleEventClick}
-          editable={true}
-          selectable={true}
-          height="80vh"
-          eventDisplay="block"
-          eventTextColor="#fff"
-        />
-      </div>
+      {/* Main Layout */}
+      <div className="flex flex-col xl:flex-row gap-10">
+        {/* Left Section - Chart + Departments */}
+        <div className="w-full xl:w-2/3 space-y-8">
+          {/* Tabs */}
+          <div className="flex gap-3">
+            {["Week", "Month", "Quarter", "Year"].map((label, i) => (
+              <Button
+                key={i}
+                variant={label === "Week" ? "default" : "outline"}
+                className={`${
+                  label === "Week"
+                    ? "bg-blue-600 text-white"
+                    : "border-gray-300 text-gray-700"
+                }`}
+              >
+                {label}
+              </Button>
+            ))}
+          </div>
 
-      {/* Floating Add Button */}
-      <motion.div
-        className="fixed bottom-8 right-8"
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.3 }}
-      >
-        <Button
-          className="rounded-full w-14 h-14 bg-indigo-600 hover:bg-indigo-700 shadow-lg"
-          onClick={() => setOpen(true)}
-        >
-          <Plus className="w-6 h-6 text-white" />
-        </Button>
-      </motion.div>
+          {/* Bar Chart */}
+          <Card className="p-6 border-none shadow-sm">
+            <ResponsiveContainer width="100%" height={240}>
+              <BarChart data={data} barSize={50}>
+                <XAxis
+                  dataKey="day"
+                  axisLine={false}
+                  tick={{ fill: "#2563eb", fontWeight: 600 }}
+                />
+                <Tooltip
+                  cursor={{ fill: "rgba(37,99,235,0.1)" }}
+                  formatter={(value) => `${value}%`}
+                />
+                <Bar dataKey="value" fill="#bfdbfe" radius={[6, 6, 0, 0]}>
+                  <LabelList
+                    dataKey="value"
+                    position="top"
+                    formatter={(value) => `${value}%`}
+                    fill="#2563eb"
+                    fontWeight={600}
+                  />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </Card>
+
+          {/* Department Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {departments.map((dept, i) => (
+              <Card
+                key={i}
+                className="flex items-center justify-between p-5 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100"
+              >
+                <h2 className="text-gray-700 font-semibold text-lg">
+                  {dept.name}
+                </h2>
+                <span className="text-blue-600 font-bold text-xl">
+                  {dept.percent}%
+                </span>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Right Section - Calendar */}
+        <div className="w-full xl:w-1/3 bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
+          <FullCalendar
+            plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin]}
+            initialView="dayGridMonth"
+            height="75vh"
+            events={events}
+            dateClick={handleDateClick}
+            eventClick={handleEventClick}
+            headerToolbar={{
+              left: "prev,next today",
+              center: "title",
+              right: "dayGridMonth,timeGridWeek,listWeek",
+            }}
+            dayMaxEvents={3}
+            eventColor="#2563eb"
+          />
+        </div>
+      </div>
 
       {/* Add Event Dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-xl font-semibold text-indigo-700">
-              Add New Event / Reminder
+            <DialogTitle className="text-xl font-semibold text-blue-600">
+              Add New Event
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4 mt-2">
@@ -205,11 +271,9 @@ export default function AttendanceCalendar() {
               onChange={(e) => setNewEvent({ ...newEvent, date: e.target.value })}
             />
             <Textarea
-              placeholder="Short description of event"
+              placeholder="Short description"
               value={newEvent.description}
-              onChange={(e) =>
-                setNewEvent({ ...newEvent, description: e.target.value })
-              }
+              onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
             />
             <Select
               value={newEvent.department}
@@ -220,15 +284,15 @@ export default function AttendanceCalendar() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="Engineering">Engineering</SelectItem>
+                <SelectItem value="Marketing">Marketing</SelectItem>
                 <SelectItem value="HR">HR</SelectItem>
-                <SelectItem value="Management">Management</SelectItem>
+                <SelectItem value="Design">Design</SelectItem>
                 <SelectItem value="General">General</SelectItem>
               </SelectContent>
             </Select>
-
             <Button
               onClick={handleAddEvent}
-              className="w-full bg-indigo-600 hover:bg-indigo-700"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold"
             >
               Add Event
             </Button>
@@ -236,18 +300,17 @@ export default function AttendanceCalendar() {
         </DialogContent>
       </Dialog>
 
-      {/* Edit/Delete Dialog */}
+      {/* Edit Event Dialog */}
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-xl font-semibold text-indigo-700">
+            <DialogTitle className="text-xl font-semibold text-blue-600">
               Edit / Delete Event
             </DialogTitle>
           </DialogHeader>
-
           <div className="space-y-4 mt-2">
             <Input
-              placeholder="Edit title"
+              placeholder="Edit event title"
               value={newEvent.title}
               onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
             />
@@ -257,11 +320,9 @@ export default function AttendanceCalendar() {
               onChange={(e) => setNewEvent({ ...newEvent, date: e.target.value })}
             />
             <Textarea
-              placeholder="Edit event description"
+              placeholder="Edit description"
               value={newEvent.description}
-              onChange={(e) =>
-                setNewEvent({ ...newEvent, description: e.target.value })
-              }
+              onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
             />
             <Select
               value={newEvent.department}
@@ -272,24 +333,25 @@ export default function AttendanceCalendar() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="Engineering">Engineering</SelectItem>
+                <SelectItem value="Marketing">Marketing</SelectItem>
                 <SelectItem value="HR">HR</SelectItem>
-                <SelectItem value="Management">Management</SelectItem>
+                <SelectItem value="Design">Design</SelectItem>
                 <SelectItem value="General">General</SelectItem>
               </SelectContent>
             </Select>
 
-            <div className="grid grid-cols-2 gap-3 mt-4">
+            <div className="grid grid-cols-2 gap-3">
               <Button
                 onClick={handleEditEvent}
                 className="bg-blue-600 hover:bg-blue-700 text-white font-semibold"
               >
-                 Save Changes
+                Save
               </Button>
               <Button
                 onClick={handleDeleteEvent}
                 className="bg-red-600 hover:bg-red-700 text-white font-semibold"
               >
-                 Delete Event
+                Delete
               </Button>
             </div>
           </div>

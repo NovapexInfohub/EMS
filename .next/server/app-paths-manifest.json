@@ -1,8 +1,6 @@
 {
+  "/page": "app/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/dashboard/reports/generate/page": "app/dashboard/reports/generate/page.js",
   "/employeedashboard/page": "app/employeedashboard/page.js",
-  "/attendance/page": "app/attendance/page.js",
-  "/performance/page": "app/performance/page.js",
-  "/settings/page": "app/settings/page.js"
+  "/employeedashboard/[id]/performance/page": "app/employeedashboard/[id]/performance/page.js"
 }
