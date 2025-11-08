@@ -9,14 +9,15 @@ import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import {
   ChevronLeft,
-  BarChart3,
-  ClipboardCheck,
   Target,
+  BarChart3,
   FileText,
-  BookOpenCheck,
-  Sparkles,
-  Lightbulb,
   ThumbsUp,
+  BookOpenCheck,
+  ClipboardCheck,
+  Sparkles,
+  PlusCircle,
+  CheckCircle2,
 } from "lucide-react";
 
 export default function EmployeePerformancePage() {
@@ -24,7 +25,14 @@ export default function EmployeePerformancePage() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
-  const [employee] = useState({
+  const [newGoal, setNewGoal] = useState("");
+  const [selfAppraisal, setSelfAppraisal] = useState({
+    achievements: "",
+    comments: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const [employee, setEmployee] = useState({
     name: "Alice Johnson",
     department: "Engineering",
     goals: [
@@ -38,36 +46,73 @@ export default function EmployeePerformancePage() {
       { name: "Collaboration", value: 88 },
       { name: "Innovation", value: 85 },
     ],
+    feedback: [
+      {
+        title: "H1 Review (Jan–Jun 2025)",
+        manager: "Robert Brown",
+        comment:
+          "Strong contribution to project architecture and mentoring. Needs minor improvement in task documentation.",
+        rating: "4.5 / 5",
+      },
+      {
+        title: "H2 Review (Jul–Dec 2025)",
+        manager: "Pending",
+        comment:
+          "Review scheduled soon. Continue maintaining code quality and mentoring sessions.",
+        rating: "Pending",
+      },
+    ],
     trainings: [
       "Advanced React Patterns",
-      "Time Management for Developers",
       "Effective Code Reviews",
+      "Time Management for Developers",
+      "Improving Sprint Documentation",
     ],
     reports: [
-      { period: "Q1 2025", rating: "4.4 / 5", summary: "Excellent delivery pace" },
-      { period: "Q2 2025", rating: "4.3 / 5", summary: "Strong technical initiative" },
+      {
+        period: "Q1 2025",
+        summary:
+          "Exceeded project delivery goals and maintained 98% sprint adherence.",
+        rating: "4.4 / 5",
+      },
+      {
+        period: "Q2 2025",
+        summary:
+          "Improved collaboration with cross-functional teams and initiated new UI performance metrics.",
+        rating: "4.3 / 5",
+      },
     ],
-    feedback: {
-      h1: {
-        title: "H1 Review (Jan - Jun 2025)",
-        from: "Manager: Robert Brown",
-        comment:
-          "Great technical leadership and proactive contributions during the UI refactor. Slight improvement needed in sprint documentation.",
-        rating: 4.5,
-      },
-      h2: {
-        title: "H2 Review (Jul - Dec 2025)",
-        comment:
-          "🌟 Your H2 review is coming soon! Keep pushing your limits — your current progress is inspiring! 🚀",
-        status: "upcoming",
-      },
-      final: {
-        title: "Final Review (2025)",
-        comment:
-          "To be unlocked post-H2 — your consistent performance and growth mindset are setting you up for success.",
-      },
-    },
   });
+
+  // Handle new goal addition
+  const handleAddGoal = () => {
+    if (newGoal.trim()) {
+      setEmployee((prev) => ({
+        ...prev,
+        goals: [...prev.goals, newGoal],
+      }));
+      setNewGoal("");
+    }
+  };
+
+  // Handle KPI progress update simulation
+  const handleIncreaseKPI = (index) => {
+    setEmployee((prev) => {
+      const updatedKPIs = [...prev.kpis];
+      updatedKPIs[index].value = Math.min(updatedKPIs[index].value + 1, 100);
+      return { ...prev, kpis: updatedKPIs };
+    });
+  };
+
+  // Handle self-appraisal submit
+  const handleSubmitAppraisal = () => {
+    if (!selfAppraisal.achievements.trim() || !selfAppraisal.comments.trim()) {
+      alert("Please fill in both fields before submitting.");
+      return;
+    }
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 3000); // Auto-hide success after 3s
+  };
 
   return (
     <motion.main
@@ -81,10 +126,11 @@ export default function EmployeePerformancePage() {
         <div>
           <h1 className="text-3xl font-bold text-indigo-700 flex items-center gap-2">
             <Sparkles className="text-purple-500 w-7 h-7" />
-            Performance Module
+            Performance Dashboard
           </h1>
           <p className="text-gray-600 mt-1">
-            Overview for <span className="font-semibold">{employee.name}</span>
+            Overview for <span className="font-semibold">{employee.name}</span>{" "}
+            — Department: {employee.department}
           </p>
         </div>
         <Button
@@ -95,117 +141,151 @@ export default function EmployeePerformancePage() {
         </Button>
       </div>
 
-      {/* ===== 1️⃣ SET GOALS ===== */}
+      {/* ===== 🎯 SET GOALS ===== */}
       <motion.div whileHover={{ scale: 1.01 }}>
-        <Card className="shadow-lg border border-indigo-100 hover:shadow-xl transition-all">
+        <Card className="shadow-md border border-indigo-100 hover:shadow-xl transition-all">
           <CardHeader className="flex items-center gap-3">
             <Target className="text-indigo-600 w-6 h-6" />
-            <CardTitle>🎯 Set Goals</CardTitle>
+            <CardTitle>🎯 Goals & Objectives</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 text-gray-700">
-            {employee.goals.map((goal, idx) => (
-              <li key={idx} className="ml-5 list-disc">
-                {goal}
-              </li>
-            ))}
-            <Input placeholder="Add a new goal..." className="mt-3" />
-            <Button variant="outline" className="mt-2">Add Goal</Button>
+            {employee.goals.length > 0 ? (
+              employee.goals.map((goal, idx) => (
+                <li key={idx} className="ml-5 list-disc">
+                  {goal}
+                </li>
+              ))
+            ) : (
+              <p className="text-gray-500 italic ml-2">
+                No goals added yet. Add one below.
+              </p>
+            )}
+            <div className="flex gap-2 mt-3">
+              <Input
+                placeholder="Add a new goal..."
+                value={newGoal}
+                onChange={(e) => setNewGoal(e.target.value)}
+              />
+              <Button
+                variant="outline"
+                onClick={handleAddGoal}
+                className="flex items-center gap-2"
+              >
+                <PlusCircle className="w-4 h-4" /> Add
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </motion.div>
 
-      {/* ===== 2️⃣ TRACK KPIs ===== */}
+      {/* ===== 📊 TRACK KPIs ===== */}
       <motion.div whileHover={{ scale: 1.01 }}>
-        <Card className="shadow-lg border border-purple-100 hover:shadow-xl transition-all">
+        <Card className="shadow-md border border-purple-100 hover:shadow-xl transition-all">
           <CardHeader className="flex items-center gap-3">
             <BarChart3 className="text-purple-600 w-6 h-6" />
-            <CardTitle>📊 Track KPIs</CardTitle>
+            <CardTitle>📊 Key Performance Indicators</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {employee.kpis.map((kpi, idx) => (
               <div key={idx}>
-                <div className="flex justify-between mb-1">
-                  <span>{kpi.name}</span>
+                <div className="flex justify-between mb-1 text-gray-700">
+                  <span className="font-medium">{kpi.name}</span>
                   <span>{kpi.value}%</span>
                 </div>
                 <Progress value={kpi.value} className="h-3" />
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => handleIncreaseKPI(idx)}
+                  className="mt-1"
+                >
+                  Improve +
+                </Button>
               </div>
             ))}
           </CardContent>
         </Card>
       </motion.div>
 
-      {/* ===== 3️⃣ SUBMIT SELF-APPRAISAL ===== */}
+      {/* ===== 📝 SELF APPRAISAL ===== */}
       <motion.div whileHover={{ scale: 1.01 }}>
-        <Card className="shadow-lg border border-green-100 hover:shadow-xl transition-all">
+        <Card className="shadow-md border border-green-100 hover:shadow-xl transition-all">
           <CardHeader className="flex items-center gap-3">
             <FileText className="text-green-600 w-6 h-6" />
-            <CardTitle>📝 Submit Self-Appraisal</CardTitle>
+            <CardTitle>📝 Self-Appraisal</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            <Input placeholder="Describe your key achievements..." />
-            <Button className="bg-green-600 hover:bg-green-700 text-white mt-2">
-              Submit Self-Appraisal
+            <Input
+              placeholder="Describe your key achievements..."
+              value={selfAppraisal.achievements}
+              onChange={(e) =>
+                setSelfAppraisal((p) => ({
+                  ...p,
+                  achievements: e.target.value,
+                }))
+              }
+            />
+            <Input
+              placeholder="Any challenges or feedback for improvement..."
+              value={selfAppraisal.comments}
+              onChange={(e) =>
+                setSelfAppraisal((p) => ({
+                  ...p,
+                  comments: e.target.value,
+                }))
+              }
+            />
+            <Button
+              className="bg-green-600 hover:bg-green-700 text-white mt-2"
+              onClick={handleSubmitAppraisal}
+            >
+              Submit Appraisal
             </Button>
+            {submitted && (
+              <div className="flex items-center gap-2 text-green-700 font-medium mt-2">
+                <CheckCircle2 className="w-5 h-5" />
+                Self-Appraisal Submitted Successfully!
+              </div>
+            )}
           </CardContent>
         </Card>
       </motion.div>
 
-      {/* ===== 4️⃣ VIEW MANAGER FEEDBACK ===== */}
+      {/* ===== 💬 MANAGER FEEDBACK ===== */}
       <motion.div whileHover={{ scale: 1.01 }}>
-        <Card className="shadow-lg border border-blue-100 hover:shadow-xl transition-all">
+        <Card className="shadow-md border border-blue-100 hover:shadow-xl transition-all">
           <CardHeader className="flex items-center gap-3">
             <ThumbsUp className="text-blue-600 w-6 h-6" />
-            <CardTitle>💬 View Manager Feedback</CardTitle>
+            <CardTitle>💬 Manager Feedback</CardTitle>
           </CardHeader>
-          <CardContent className="grid md:grid-cols-3 gap-5">
-            {/* H1 Review */}
-            <div className="p-4 rounded-lg border bg-gradient-to-br from-indigo-50 to-white">
-              <h2 className="text-lg font-semibold text-indigo-700">
-                {employee.feedback.h1.title}
-              </h2>
-              <p className="text-sm text-gray-500 mb-1">{employee.feedback.h1.from}</p>
-              <p className="text-gray-700">{employee.feedback.h1.comment}</p>
-              <p className="font-medium text-indigo-700 mt-2">
-                ⭐ Rating: {employee.feedback.h1.rating}/5
-              </p>
-            </div>
-
-            {/* H2 Upcoming */}
-            <motion.div
-              animate={{ opacity: [0.8, 1, 0.8], scale: [1, 1.02, 1] }}
-              transition={{ repeat: Infinity, duration: 3 }}
-              className="p-4 rounded-lg border bg-gradient-to-br from-yellow-50 to-white"
-            >
-              <h2 className="text-lg font-semibold text-yellow-700">
-                {employee.feedback.h2.title}
-              </h2>
-              <p className="mt-2 text-yellow-600 font-medium">
-                {employee.feedback.h2.comment}
-              </p>
-              <p className="mt-1 text-sm text-gray-500 italic">
-                Status: {employee.feedback.h2.status.toUpperCase()}
-              </p>
-            </motion.div>
-
-            {/* Final Review Locked */}
-            <div className="p-4 rounded-lg border bg-gradient-to-br from-gray-50 to-white opacity-70">
-              <h2 className="text-lg font-semibold text-gray-600">
-                {employee.feedback.final.title}
-              </h2>
-              <p className="text-gray-500 mt-2">{employee.feedback.final.comment}</p>
-              <p className="mt-2 italic text-sm text-gray-400">🔒 Will unlock after H2 review</p>
-            </div>
+          <CardContent className="grid md:grid-cols-2 gap-5">
+            {employee.feedback.map((fb, idx) => (
+              <div
+                key={idx}
+                className="p-4 rounded-lg border bg-gradient-to-br from-indigo-50 to-white"
+              >
+                <h2 className="text-lg font-semibold text-indigo-700">
+                  {fb.title}
+                </h2>
+                <p className="text-sm text-gray-500 mb-1">
+                  Manager: {fb.manager}
+                </p>
+                <p className="text-gray-700">{fb.comment}</p>
+                <p className="font-medium text-indigo-700 mt-2">
+                  ⭐ Rating: {fb.rating}
+                </p>
+              </div>
+            ))}
           </CardContent>
         </Card>
       </motion.div>
 
-      {/* ===== 5️⃣ ACCESS TRAINING RECOMMENDATIONS ===== */}
+      {/* ===== 🎓 TRAINING RECOMMENDATIONS ===== */}
       <motion.div whileHover={{ scale: 1.01 }}>
-        <Card className="shadow-lg border border-teal-100 hover:shadow-xl transition-all">
+        <Card className="shadow-md border border-teal-100 hover:shadow-xl transition-all">
           <CardHeader className="flex items-center gap-3">
             <BookOpenCheck className="text-teal-600 w-6 h-6" />
-            <CardTitle>🎓 Access Training Recommendations</CardTitle>
+            <CardTitle>🎓 Training Recommendations</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
             {employee.trainings.map((train, idx) => (
@@ -214,18 +294,18 @@ export default function EmployeePerformancePage() {
               </li>
             ))}
             <Button variant="outline" className="mt-3">
-              Explore More Trainings
+              View All Trainings
             </Button>
           </CardContent>
         </Card>
       </motion.div>
 
-      {/* ===== 6️⃣ VIEW PERFORMANCE REPORTS ===== */}
+      {/* ===== 📈 PERFORMANCE REPORTS ===== */}
       <motion.div whileHover={{ scale: 1.01 }}>
-        <Card className="shadow-lg border border-pink-100 hover:shadow-xl transition-all">
+        <Card className="shadow-md border border-pink-100 hover:shadow-xl transition-all">
           <CardHeader className="flex items-center gap-3">
             <ClipboardCheck className="text-pink-600 w-6 h-6" />
-            <CardTitle>📈 View Performance Reports</CardTitle>
+            <CardTitle>📈 Performance Reports</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             {employee.reports.map((report, idx) => (
