@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { CalendarDays, Plus } from "lucide-react";
 import FullCalendar from "@fullcalendar/react";
@@ -15,7 +15,6 @@ export default function EmployeeAttendancePage() {
   const id = params?.id;
   const router = useRouter();
 
-  // Static demo data
   const [attendance] = useState({
     records: [
       { date: "2025-10-01", status: "Present" },
@@ -37,10 +36,22 @@ export default function EmployeeAttendancePage() {
   }));
 
   const [hoveredDate, setHoveredDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const today = new Date().toISOString().split("T")[0];
 
   const handlePlusClick = (date) => {
-    router.push(`/employeedashboard/${id}/attendance/request-form?date=${date}`);
+    setSelectedDate(date);
+    setShowModal(true);
+  };
+
+  const handleOptionClick = (option) => {
+    setShowModal(false);
+    if (option === "attendance") {
+      router.push(`/employeedashboard/${id}/attendance/mark?date=${selectedDate}`);
+    } else if (option === "leave") {
+      router.push(`/employeedashboard/${id}/attendance/request-form?date=${selectedDate}`);
+    }
   };
 
   return (
@@ -114,6 +125,49 @@ export default function EmployeeAttendancePage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* ===== Modal for Attendance / Leave Selection ===== */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50"
+          >
+            <motion.div
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.9 }}
+              className="bg-white rounded-2xl shadow-xl p-6 w-80 text-center space-y-4"
+            >
+              <h2 className="text-lg font-semibold text-gray-800">
+                Select Action for {selectedDate}
+              </h2>
+              <div className="space-y-3">
+                <Button
+                  onClick={() => handleOptionClick("attendance")}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white"
+                >
+                  🕒 Mark Attendance
+                </Button>
+                <Button
+                  onClick={() => handleOptionClick("leave")}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                >
+                  🌴 Apply for Leave
+                </Button>
+              </div>
+              <button
+                onClick={() => setShowModal(false)}
+                className="text-sm text-gray-500 hover:underline"
+              >
+                Cancel
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.main>
   );
 }
