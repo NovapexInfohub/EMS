@@ -193,14 +193,14 @@ export default function EmployeePerformancePage() {
                   <span>{kpi.value}%</span>
                 </div>
                 <Progress value={kpi.value} className="h-3" />
-                <Button
+                {/* <Button
                   variant="outline"
                   size="sm"
                   onClick={() => handleIncreaseKPI(idx)}
                   className="mt-1"
                 >
                   Improve +
-                </Button>
+                </Button> */}
               </div>
             ))}
           </CardContent>

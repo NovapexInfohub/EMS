@@ -1,6 +1,8 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/employeedashboard/page": "app/employeedashboard/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/page": "app/page.js",
+  "/employeedashboard/[id]/attendance/page": "app/employeedashboard/[id]/attendance/page.js",
+  "/employeedashboard/[id]/attendance/request-form/page": "app/employeedashboard/[id]/attendance/request-form/page.js",
+  "/employeedashboard/[id]/attendance/mark/page": "app/employeedashboard/[id]/attendance/mark/page.js",
   "/employeedashboard/[id]/performance/page": "app/employeedashboard/[id]/performance/page.js"
 }
