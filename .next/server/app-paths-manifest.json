@@ -1,6 +1,5 @@
 {
-  "/employeedashboard/[id]/attendance/mark/page": "app/employeedashboard/[id]/attendance/mark/page.js",
-  "/employeedashboard/[id]/attendance/summary/page": "app/employeedashboard/[id]/attendance/summary/page.js",
-  "/employeedashboard/[id]/attendance/workhours/page": "app/employeedashboard/[id]/attendance/workhours/page.js",
-  "/employeedashboard/[id]/attendance/regularization/page": "app/employeedashboard/[id]/attendance/regularization/page.js"
+  "/employeedashboard/[id]/performance/page": "app/employeedashboard/[id]/performance/page.js",
+  "/employeedashboard/[id]/payroll/page": "app/employeedashboard/[id]/payroll/page.js",
+  "/employeedashboard/page": "app/employeedashboard/page.js"
 }
