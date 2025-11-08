@@ -1,5 +1,10 @@
 {
-  "/employeedashboard/[id]/performance/page": "app/employeedashboard/[id]/performance/page.js",
   "/employeedashboard/[id]/payroll/page": "app/employeedashboard/[id]/payroll/page.js",
-  "/employeedashboard/page": "app/employeedashboard/page.js"
+  "/employeedashboard/[id]/payroll/salary-structure/page": "app/employeedashboard/[id]/payroll/salary-structure/page.js",
+  "/employeedashboard/[id]/payroll/download-payslip/page": "app/employeedashboard/[id]/payroll/download-payslip/page.js",
+  "/employeedashboard/[id]/payroll/view-payslip/page": "app/employeedashboard/[id]/payroll/view-payslip/page.js",
+  "/employeedashboard/[id]/payroll/tax-summary/page": "app/employeedashboard/[id]/payroll/tax-summary/page.js",
+  "/employeedashboard/[id]/payroll/reimbursement-claim/page": "app/employeedashboard/[id]/payroll/reimbursement-claim/page.js",
+  "/employeedashboard/[id]/payroll/revision-history/page": "app/employeedashboard/[id]/payroll/revision-history/page.js",
+  "/employeedashboard/[id]/payroll/bank-details/page": "app/employeedashboard/[id]/payroll/bank-details/page.js"
 }

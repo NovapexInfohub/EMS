@@ -11,30 +11,55 @@
       "static/chunks/main-app.js",
       "static/chunks/app/loading.js"
     ],
-    "/employeedashboard/[id]/attendance/mark/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/attendance/mark/page.js"
-    ],
-    "/employeedashboard/[id]/attendance/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/attendance/page.js"
-    ],
     "/employeedashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/employeedashboard/page.js"
     ],
-    "/employeedashboard/[id]/performance/page": [
+    "/employeedashboard/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/performance/page.js"
+      "static/chunks/app/employeedashboard/[id]/page.js"
     ],
     "/employeedashboard/[id]/payroll/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/employeedashboard/[id]/payroll/page.js"
+    ],
+    "/employeedashboard/[id]/payroll/salary-structure/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/payroll/salary-structure/page.js"
+    ],
+    "/employeedashboard/[id]/payroll/view-payslip/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/payroll/view-payslip/page.js"
+    ],
+    "/employeedashboard/[id]/payroll/download-payslip/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/payroll/download-payslip/page.js"
+    ],
+    "/employeedashboard/[id]/payroll/tax-summary/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/payroll/tax-summary/page.js"
+    ],
+    "/employeedashboard/[id]/payroll/bank-details/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/payroll/bank-details/page.js"
+    ],
+    "/employeedashboard/[id]/payroll/reimbursement-claim/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/payroll/reimbursement-claim/page.js"
+    ],
+    "/employeedashboard/[id]/payroll/revision-history/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/payroll/revision-history/page.js"
     ]
   }
 }

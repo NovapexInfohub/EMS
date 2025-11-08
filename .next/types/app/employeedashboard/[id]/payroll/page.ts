@@ -1,4 +1,4 @@
-// File: G:\NovapexERP_nileshsir\EMS\app\employeedashboard\[id]\payroll\page.jsx
+// File: G:\NovapexERP_nileshsir\EMS\app\employeedashboard\[id]\payroll\page.tsx
 import * as entry from '../../../../../../app/employeedashboard/[id]/payroll/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
