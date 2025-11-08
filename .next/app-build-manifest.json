@@ -11,35 +11,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/loading.js"
     ],
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
-    ],
-    "/dashboard/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/page.js"
-    ],
-    "/employeedashboard/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/page.js"
-    ],
-    "/employeedashboard/[id]/attendance/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/attendance/page.js"
-    ],
-    "/employeedashboard/[id]/attendance/request-form/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/attendance/request-form/page.js"
-    ],
     "/employeedashboard/[id]/attendance/mark/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/employeedashboard/[id]/attendance/mark/page.js"
+    ],
+    "/employeedashboard/[id]/attendance/regularization/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/employeedashboard/[id]/attendance/regularization/page.js"
     ],
     "/employeedashboard/[id]/attendance/summary/page": [
       "static/chunks/webpack.js",
@@ -50,11 +30,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/employeedashboard/[id]/attendance/workhours/page.js"
-    ],
-    "/employeedashboard/[id]/attendance/overtime/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employeedashboard/[id]/attendance/overtime/page.js"
     ]
   }
 }
