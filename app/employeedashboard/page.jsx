@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { motion } from "framer-motion";
 import {
   User,
@@ -17,6 +16,7 @@ import {
   Target,
   MessageSquare,
   PhoneCall,
+  CreditCard, // ✅ Added for Payroll card
 } from "lucide-react";
 
 export default function EmployeeDashboardMain() {
@@ -30,6 +30,9 @@ export default function EmployeeDashboardMain() {
     status: "Active",
     performance: 88,
     attendance: 96,
+    netPay: "₹85,000", // ✅ Payroll data
+    payPeriod: "October 2025",
+    payrollProgress: 100,
     skills: ["React", "Next.js", "Tailwind CSS", "REST APIs"],
     upcomingEvents: [
       { title: "Team Meeting", date: "2025-10-06", time: "10:00 AM" },
@@ -67,7 +70,7 @@ export default function EmployeeDashboardMain() {
       {/* ===== Header ===== */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <h1 className="text-4xl font-extrabold text-indigo-700 flex items-center gap-2">
-           Welcome, {employee.name}
+          Welcome, {employee.name}
         </h1>
         <Badge
           className={`text-sm px-4 py-2 rounded-full font-medium shadow-md ${
@@ -81,9 +84,12 @@ export default function EmployeeDashboardMain() {
       </div>
 
       {/* ===== Overview Cards ===== */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/** Profile **/}
-        <motion.div whileHover={{ scale: 1.03 }} className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        {/* Profile Info */}
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300"
+        >
           <CardHeader className="flex items-center gap-3 p-4">
             <User className="text-indigo-600 w-6 h-6" />
             <CardTitle className="text-lg font-semibold">Profile Info</CardTitle>
@@ -95,8 +101,11 @@ export default function EmployeeDashboardMain() {
           </CardContent>
         </motion.div>
 
-        {/** Attendance **/}
-        <motion.div whileHover={{ scale: 1.03 }} className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300">
+        {/* Attendance */}
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300"
+        >
           <CardHeader className="flex items-center gap-3 p-4">
             <CalendarDays className="text-indigo-600 w-6 h-6" />
             <CardTitle className="text-lg font-semibold">Attendance</CardTitle>
@@ -117,16 +126,17 @@ export default function EmployeeDashboardMain() {
           </CardContent>
         </motion.div>
 
-        {/** Performance **/}
-        <motion.div whileHover={{ scale: 1.03 }} className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300">
+        {/* Performance */}
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300"
+        >
           <CardHeader className="flex items-center gap-3 p-4">
             <TrendingUp className="text-indigo-600 w-6 h-6" />
             <CardTitle className="text-lg font-semibold">Performance</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 p-4">
-            <p className="text-gray-700 font-medium">
-              Performance Score: {employee.performance}%
-            </p>
+            <p className="text-gray-700 font-medium">Performance Score: {employee.performance}%</p>
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${employee.performance}%` }}
@@ -140,10 +150,41 @@ export default function EmployeeDashboardMain() {
             </Button>
           </CardContent>
         </motion.div>
+
+        {/* ✅ Payroll */}
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300"
+        >
+          <CardHeader className="flex items-center gap-3 p-4">
+            <CreditCard className="text-indigo-600 w-6 h-6" />
+            <CardTitle className="text-lg font-semibold">Payroll</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3 p-4">
+            <p className="text-gray-700 font-medium">
+              Net Pay: <span className="text-green-600">{employee.netPay}</span>
+            </p>
+            <p className="text-gray-700">Pay Period: {employee.payPeriod}</p>
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${employee.payrollProgress}%` }}
+              className="h-3 bg-purple-500 rounded-full"
+            ></motion.div>
+            <Button
+              onClick={() => router.push(`/employeedashboard/${employee.id}/payroll`)}
+              className="w-full mt-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition-all duration-200"
+            >
+              View Payroll
+            </Button>
+          </CardContent>
+        </motion.div>
       </div>
 
       {/* ===== Company Overview ===== */}
-      <motion.div whileHover={{ scale: 1.02 }} className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300">
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300"
+      >
         <CardHeader className="flex items-center gap-3 p-4">
           <Building2 className="text-indigo-600 w-6 h-6" />
           <CardTitle className="text-lg font-semibold">Company Overview</CardTitle>
@@ -157,7 +198,10 @@ export default function EmployeeDashboardMain() {
       </motion.div>
 
       {/* ===== Projects ===== */}
-      <motion.div whileHover={{ scale: 1.02 }} className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300">
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300"
+      >
         <CardHeader className="flex items-center gap-3 p-4">
           <ClipboardList className="text-indigo-600 w-6 h-6" />
           <CardTitle className="text-lg font-semibold">Current Projects</CardTitle>
@@ -177,7 +221,10 @@ export default function EmployeeDashboardMain() {
       </motion.div>
 
       {/* ===== Skills ===== */}
-      <motion.div whileHover={{ scale: 1.02 }} className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300">
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300"
+      >
         <CardHeader className="flex items-center gap-3 p-4">
           <BookOpen className="text-indigo-600 w-6 h-6" />
           <CardTitle className="text-lg font-semibold">Skills</CardTitle>
@@ -196,8 +243,11 @@ export default function EmployeeDashboardMain() {
 
       {/* ===== Goals & Feedback ===== */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/** Goals **/}
-        <motion.div whileHover={{ scale: 1.02 }} className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300">
+        {/* Goals */}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300"
+        >
           <CardHeader className="flex items-center gap-3 p-4">
             <Target className="text-indigo-600 w-6 h-6" />
             <CardTitle className="text-lg font-semibold">Goals</CardTitle>
@@ -220,8 +270,11 @@ export default function EmployeeDashboardMain() {
           </CardContent>
         </motion.div>
 
-        {/** Feedback **/}
-        <motion.div whileHover={{ scale: 1.02 }} className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300">
+        {/* Feedback */}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300"
+        >
           <CardHeader className="flex items-center gap-3 p-4">
             <MessageSquare className="text-indigo-600 w-6 h-6" />
             <CardTitle className="text-lg font-semibold">Recent Feedback</CardTitle>
@@ -240,9 +293,14 @@ export default function EmployeeDashboardMain() {
       </div>
 
       {/* ===== Upcoming Events ===== */}
-      <motion.div whileHover={{ scale: 1.02 }} className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300">
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300"
+      >
         <CardHeader className="p-4">
-          <CardTitle className="text-indigo-700 text-lg font-semibold">Upcoming Events</CardTitle>
+          <CardTitle className="text-indigo-700 text-lg font-semibold">
+            Upcoming Events
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3 p-4">
           {employee.upcomingEvents.length > 0 ? (
@@ -253,7 +311,9 @@ export default function EmployeeDashboardMain() {
                 className="p-3 border rounded-lg bg-gray-50 hover:bg-gray-100 transition-all"
               >
                 <p className="font-medium">{event.title}</p>
-                <p className="text-sm text-gray-500">{event.date} • {event.time}</p>
+                <p className="text-sm text-gray-500">
+                  {event.date} • {event.time}
+                </p>
               </motion.div>
             ))
           ) : (
@@ -263,7 +323,10 @@ export default function EmployeeDashboardMain() {
       </motion.div>
 
       {/* ===== Contact ===== */}
-      <motion.div whileHover={{ scale: 1.02 }} className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300">
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        className="rounded-2xl shadow-xl border border-gray-200 bg-white/70 backdrop-blur-md transition-all duration-300"
+      >
         <CardHeader className="flex items-center gap-3 p-4">
           <PhoneCall className="text-indigo-600 w-6 h-6" />
           <CardTitle className="text-lg font-semibold">Need Help?</CardTitle>

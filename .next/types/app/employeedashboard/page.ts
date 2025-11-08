@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // File: C:\Users\OWNER\Desktop\Nova\EMS\app\employeedashboard\page.jsx
+=======
+// File: G:\NovapexERP_nileshsir\EMS\app\employeedashboard\page.jsx
+>>>>>>> ee01ccb64eccd31302906dfd3d40a16e67d6288d
 import * as entry from '../../../../app/employeedashboard/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

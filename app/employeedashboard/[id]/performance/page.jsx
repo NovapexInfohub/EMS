@@ -18,6 +18,8 @@ import {
   Sparkles,
   PlusCircle,
   CheckCircle2,
+  User,
+  Briefcase,
 } from "lucide-react";
 
 export default function EmployeePerformancePage() {
@@ -35,6 +37,8 @@ export default function EmployeePerformancePage() {
   const [employee, setEmployee] = useState({
     name: "Alice Johnson",
     department: "Engineering",
+    designation: "Software Engineer",
+    employeeID: "EMP1025",
     goals: [
       "Improve TypeScript proficiency",
       "Contribute to UI component library",
@@ -84,7 +88,6 @@ export default function EmployeePerformancePage() {
     ],
   });
 
-  // Handle new goal addition
   const handleAddGoal = () => {
     if (newGoal.trim()) {
       setEmployee((prev) => ({
@@ -95,7 +98,6 @@ export default function EmployeePerformancePage() {
     }
   };
 
-  // Handle KPI progress update simulation
   const handleIncreaseKPI = (index) => {
     setEmployee((prev) => {
       const updatedKPIs = [...prev.kpis];
@@ -104,35 +106,39 @@ export default function EmployeePerformancePage() {
     });
   };
 
-  // Handle self-appraisal submit
   const handleSubmitAppraisal = () => {
     if (!selfAppraisal.achievements.trim() || !selfAppraisal.comments.trim()) {
       alert("Please fill in both fields before submitting.");
       return;
     }
     setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000); // Auto-hide success after 3s
+    setTimeout(() => setSubmitted(false), 3000);
   };
 
   return (
     <motion.main
-      className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-8 space-y-10"
+      className="min-h-screen bg-gray-50 py-10 px-10 space-y-10"
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      {/* ===== HEADER ===== */}
-      <div className="flex justify-between items-center flex-wrap gap-3">
-        <div>
-          <h1 className="text-3xl font-bold text-indigo-700 flex items-center gap-2">
-            <Sparkles className="text-purple-500 w-7 h-7" />
-            Performance Dashboard
-          </h1>
-          <p className="text-gray-600 mt-1">
-            Overview for <span className="font-semibold">{employee.name}</span>{" "}
-            — Department: {employee.department}
-          </p>
+      {/* ======= ERP HEADER ======= */}
+      <div className="flex justify-between items-center flex-wrap gap-4 bg-white shadow-sm border border-gray-200 rounded-xl p-6">
+        <div className="flex items-center gap-5">
+          <div className="w-16 h-16 bg-indigo-100 flex items-center justify-center rounded-full">
+            <User className="w-8 h-8 text-indigo-600" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold text-indigo-700">
+              {employee.name}
+            </h1>
+            <p className="text-gray-600">
+              {employee.designation} • {employee.department}
+            </p>
+            <p className="text-sm text-gray-400">Employee ID: {employee.employeeID}</p>
+          </div>
         </div>
+
         <Button
           onClick={() => router.push(`/employeedashboard`)}
           className="bg-indigo-600 hover:bg-indigo-700 text-white flex items-center gap-2"
@@ -141,59 +147,55 @@ export default function EmployeePerformancePage() {
         </Button>
       </div>
 
-      {/* ===== 🎯 SET GOALS ===== */}
-      <motion.div whileHover={{ scale: 1.01 }}>
-        <Card className="shadow-md border border-indigo-100 hover:shadow-xl transition-all">
+      {/* ======= DASHBOARD GRID ======= */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* 🎯 Goals */}
+        <Card className="shadow-md border border-indigo-100 bg-white hover:shadow-lg transition">
           <CardHeader className="flex items-center gap-3">
             <Target className="text-indigo-600 w-6 h-6" />
-            <CardTitle>🎯 Goals & Objectives</CardTitle>
+            <CardTitle className="text-lg font-semibold">Goals & Objectives</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 text-gray-700">
-            {employee.goals.length > 0 ? (
-              employee.goals.map((goal, idx) => (
-                <li key={idx} className="ml-5 list-disc">
-                  {goal}
-                </li>
-              ))
-            ) : (
-              <p className="text-gray-500 italic ml-2">
-                No goals added yet. Add one below.
-              </p>
-            )}
+            <ul className="ml-5 list-disc">
+              {employee.goals.map((goal, idx) => (
+                <li key={idx}>{goal}</li>
+              ))}
+            </ul>
             <div className="flex gap-2 mt-3">
               <Input
                 placeholder="Add a new goal..."
                 value={newGoal}
                 onChange={(e) => setNewGoal(e.target.value)}
               />
-              <Button
-                variant="outline"
-                onClick={handleAddGoal}
-                className="flex items-center gap-2"
-              >
-                <PlusCircle className="w-4 h-4" /> Add
+              <Button variant="outline" onClick={handleAddGoal}>
+                <PlusCircle className="w-4 h-4 mr-1" /> Add
               </Button>
             </div>
           </CardContent>
         </Card>
-      </motion.div>
 
-      {/* ===== 📊 TRACK KPIs ===== */}
-      <motion.div whileHover={{ scale: 1.01 }}>
-        <Card className="shadow-md border border-purple-100 hover:shadow-xl transition-all">
+        {/* 📊 KPIs */}
+        <Card className="shadow-md border border-purple-100 bg-white hover:shadow-lg transition">
           <CardHeader className="flex items-center gap-3">
             <BarChart3 className="text-purple-600 w-6 h-6" />
-            <CardTitle>📊 Key Performance Indicators</CardTitle>
+            <CardTitle className="text-lg font-semibold">
+              Key Performance Indicators
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {employee.kpis.map((kpi, idx) => (
               <div key={idx}>
                 <div className="flex justify-between mb-1 text-gray-700">
-                  <span className="font-medium">{kpi.name}</span>
+                  <span>{kpi.name}</span>
                   <span>{kpi.value}%</span>
                 </div>
+<<<<<<< HEAD
                 <Progress value={kpi.value} className="h-3" />
                 {/* <Button
+=======
+                <Progress value={kpi.value} className="h-2" />
+                <Button
+>>>>>>> ee01ccb64eccd31302906dfd3d40a16e67d6288d
                   variant="outline"
                   size="sm"
                   onClick={() => handleIncreaseKPI(idx)}
@@ -205,14 +207,15 @@ export default function EmployeePerformancePage() {
             ))}
           </CardContent>
         </Card>
-      </motion.div>
+      </div>
 
-      {/* ===== 📝 SELF APPRAISAL ===== */}
-      <motion.div whileHover={{ scale: 1.01 }}>
-        <Card className="shadow-md border border-green-100 hover:shadow-xl transition-all">
+      {/* 📝 Self Appraisal & 💬 Manager Feedback */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* 📝 Self Appraisal */}
+        <Card className="shadow-md border border-green-100 bg-white hover:shadow-lg transition">
           <CardHeader className="flex items-center gap-3">
             <FileText className="text-green-600 w-6 h-6" />
-            <CardTitle>📝 Self-Appraisal</CardTitle>
+            <CardTitle>Self-Appraisal</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             <Input
@@ -226,7 +229,7 @@ export default function EmployeePerformancePage() {
               }
             />
             <Input
-              placeholder="Any challenges or feedback for improvement..."
+              placeholder="Any challenges or improvement areas..."
               value={selfAppraisal.comments}
               onChange={(e) =>
                 setSelfAppraisal((p) => ({
@@ -239,34 +242,30 @@ export default function EmployeePerformancePage() {
               className="bg-green-600 hover:bg-green-700 text-white mt-2"
               onClick={handleSubmitAppraisal}
             >
-              Submit Appraisal
+              Submit
             </Button>
             {submitted && (
               <div className="flex items-center gap-2 text-green-700 font-medium mt-2">
                 <CheckCircle2 className="w-5 h-5" />
-                Self-Appraisal Submitted Successfully!
+                Appraisal Submitted Successfully!
               </div>
             )}
           </CardContent>
         </Card>
-      </motion.div>
 
-      {/* ===== 💬 MANAGER FEEDBACK ===== */}
-      <motion.div whileHover={{ scale: 1.01 }}>
-        <Card className="shadow-md border border-blue-100 hover:shadow-xl transition-all">
+        {/* 💬 Manager Feedback */}
+        <Card className="shadow-md border border-blue-100 bg-white hover:shadow-lg transition">
           <CardHeader className="flex items-center gap-3">
             <ThumbsUp className="text-blue-600 w-6 h-6" />
-            <CardTitle>💬 Manager Feedback</CardTitle>
+            <CardTitle>Manager Feedback</CardTitle>
           </CardHeader>
-          <CardContent className="grid md:grid-cols-2 gap-5">
+          <CardContent className="space-y-3">
             {employee.feedback.map((fb, idx) => (
               <div
                 key={idx}
                 className="p-4 rounded-lg border bg-gradient-to-br from-indigo-50 to-white"
               >
-                <h2 className="text-lg font-semibold text-indigo-700">
-                  {fb.title}
-                </h2>
+                <h2 className="font-semibold text-indigo-700">{fb.title}</h2>
                 <p className="text-sm text-gray-500 mb-1">
                   Manager: {fb.manager}
                 </p>
@@ -278,34 +277,33 @@ export default function EmployeePerformancePage() {
             ))}
           </CardContent>
         </Card>
-      </motion.div>
+      </div>
 
-      {/* ===== 🎓 TRAINING RECOMMENDATIONS ===== */}
-      <motion.div whileHover={{ scale: 1.01 }}>
-        <Card className="shadow-md border border-teal-100 hover:shadow-xl transition-all">
+      {/* 🎓 Training & 📈 Reports */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* 🎓 Trainings */}
+        <Card className="shadow-md border border-teal-100 bg-white hover:shadow-lg transition">
           <CardHeader className="flex items-center gap-3">
             <BookOpenCheck className="text-teal-600 w-6 h-6" />
-            <CardTitle>🎓 Training Recommendations</CardTitle>
+            <CardTitle>Training Recommendations</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
-            {employee.trainings.map((train, idx) => (
-              <li key={idx} className="ml-5 list-disc text-gray-700">
-                {train}
-              </li>
-            ))}
+            <ul className="ml-5 list-disc text-gray-700">
+              {employee.trainings.map((train, idx) => (
+                <li key={idx}>{train}</li>
+              ))}
+            </ul>
             <Button variant="outline" className="mt-3">
               View All Trainings
             </Button>
           </CardContent>
         </Card>
-      </motion.div>
 
-      {/* ===== 📈 PERFORMANCE REPORTS ===== */}
-      <motion.div whileHover={{ scale: 1.01 }}>
-        <Card className="shadow-md border border-pink-100 hover:shadow-xl transition-all">
+        {/* 📈 Reports */}
+        <Card className="shadow-md border border-pink-100 bg-white hover:shadow-lg transition">
           <CardHeader className="flex items-center gap-3">
             <ClipboardCheck className="text-pink-600 w-6 h-6" />
-            <CardTitle>📈 Performance Reports</CardTitle>
+            <CardTitle>Performance Reports</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             {employee.reports.map((report, idx) => (
@@ -320,7 +318,7 @@ export default function EmployeePerformancePage() {
             ))}
           </CardContent>
         </Card>
-      </motion.div>
+      </div>
     </motion.main>
   );
 }
