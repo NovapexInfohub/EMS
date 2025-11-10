@@ -30,7 +30,6 @@ export default function EmployeeDashboardMain() {
     status: "Active",
     performance: 88,
     attendance: 96,
-    netPay: "₹85,000", // ✅ Payroll data
     payPeriod: "October 2025",
     payrollProgress: 100,
     skills: ["React", "Next.js", "Tailwind CSS", "REST APIs"],
@@ -161,9 +160,7 @@ export default function EmployeeDashboardMain() {
             <CardTitle className="text-lg font-semibold">Payroll</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 p-4">
-            <p className="text-gray-700 font-medium">
-              Net Pay: <span className="text-green-600">{employee.netPay}</span>
-            </p>
+
             <p className="text-gray-700">Pay Period: {employee.payPeriod}</p>
             <motion.div
               initial={{ width: 0 }}
